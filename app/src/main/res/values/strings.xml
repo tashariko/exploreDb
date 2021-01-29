@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">ExploreDb</string>
+
+    <string name="offlinePageRetry">Retry</string>
+
+
+    <string name="error_layout_loading_text">Getting data, please wait&#8230;</string>
+    <string name="error_layout_sub_text"></string>
+    <string name="error_layout_error_text">We are not able to connect to internet.</string>
+    <string name="error_layout_error_subtext"></string>
+    <string name="error_layout_no_data_text">No Data Available</string>
+    <string name="error_layout_no_data_subtext"/>
+</resources>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="activityLandingGetStartedButtonText">18sp</dimen>
+    <dimen name="activityLandingTitleText">25sp</dimen>
+    <dimen name="activityLandingMessageText">16sp</dimen>
+    <dimen name="progressbarSize">40dp</dimen>
+
+    <dimen name="button_corner">8dp</dimen>
+
+    <dimen name="font_small">12sp</dimen>
+    <dimen name="font_normal">16sp</dimen>
+    <dimen name="font_big">18sp</dimen>
+    <dimen name="font_large">20sp</dimen>
+
+    <dimen name="appButtonSize">48dp</dimen>
+</resources>
