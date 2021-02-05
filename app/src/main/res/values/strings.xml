@@ -6,8 +6,16 @@
 
     <string name="error_layout_loading_text">Getting data, please wait&#8230;</string>
     <string name="error_layout_sub_text"></string>
+    <string name="generic_error_message">Error occured, try again.</string>
     <string name="error_layout_error_text">We are not able to connect to internet.</string>
     <string name="error_layout_error_subtext"></string>
     <string name="error_layout_no_data_text">No Data Available</string>
     <string name="error_layout_no_data_subtext"/>
+    <string name="homeScreenOfflineText">Offline</string>
+    <string name="toolbar_movie">Movie</string>
+    <string name="toolbar_series">Series</string>
+    <string name="toolbar_user">User</string>
+    <string name="toolbar_trending">Trending</string>
+    <string name="toolbar_search">Search</string>
+    <string name="retryText">Retry</string>
 </resources>

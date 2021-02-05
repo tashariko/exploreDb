@@ -5,12 +5,13 @@
     <color name="colorPrimaryDark">#FF3700B3</color>
     <color name="colorSecondary">#FF03DAC5</color>
     <color name="colorSecondaryDark">#FF018786</color>
-    <color name="black">#FF000000</color>
     <color name="screenBgColor">#FFFFFFFF</color>
 
     <color name="buttonDisabled">#e3cefd</color>
+    <color name="offlineColor">#ab2323</color>
+    <color name="transparent">#00ffffff</color>
 
-    <color name="appBlackColor">#333333</color>
-    <color name="textColor">#333333</color>
+    <color name="appTextColor">#333333</color>
     <color name="textLightColor">#999999</color>
+    <color name="appExtreme">#fff</color>
 </resources>

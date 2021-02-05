@@ -1,5 +1,6 @@
 package com.tashariko.exploredb.di.module
 
+import com.tashariko.exploredb.service.ConfigurationWorker
 import com.tashariko.exploredb.service.DatabaseInitialiseWorker
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
@@ -8,4 +9,8 @@ import dagger.android.ContributesAndroidInjector
 abstract class WorkerModule {
     @ContributesAndroidInjector
     abstract fun bindDownloadAudioWorker(): DatabaseInitialiseWorker
+
+
+    @ContributesAndroidInjector
+    abstract fun bindConfigurationWorker(): ConfigurationWorker
 }

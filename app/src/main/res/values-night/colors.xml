@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimaryLight">#FFBB86FC</color>
+    <color name="colorPrimary">#FF6200EE</color>
+    <color name="colorPrimaryDark">#FF3700B3</color>
+    <color name="colorSecondary">#FF03DAC5</color>
+    <color name="colorSecondaryDark">#FF018786</color>
+    <color name="screenBgColor">#333333</color>
+
+    <color name="buttonDisabled">#e3cefd</color>
+    <color name="offlineColor">#bb4e4e</color>
+    <color name="transparent">#00ffffff</color>
+
+    <color name="appTextColor">#cccccc</color>
+    <color name="textLightColor">#666666</color>
+    <color name="appExtreme">#000</color>
+
+</resources>

@@ -28,7 +28,7 @@ class AppModule {
     fun providesGson(): Gson = GsonBuilder().create()
 
     @Provides
-    fun providesBaseUrl(): String = if (BuildConfig.DEBUG)  "https://api.themoviedb.org/3" else  "https://api.themoviedb.org/3"
+    fun providesBaseUrl(): String = if (BuildConfig.DEBUG)  "https://api.themoviedb.org/" else  "https://api.themoviedb.org/"
 
     @Provides
     @Singleton

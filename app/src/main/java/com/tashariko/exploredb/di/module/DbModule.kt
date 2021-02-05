@@ -2,6 +2,7 @@ package com.tashariko.exploredb.di.module
 
 import android.app.Application
 import android.content.Context
+import android.util.Log
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.migration.Migration
@@ -14,6 +15,7 @@ import com.tashariko.exploredb.database.dao.UserDao
 import com.tashariko.exploredb.service.DatabaseInitialiseWorker
 import dagger.Module
 import dagger.Provides
+import timber.log.Timber
 import javax.inject.Singleton
 
 
@@ -35,7 +37,6 @@ class DbModule {
                     super.onCreate(db)
                     val request = OneTimeWorkRequestBuilder<DatabaseInitialiseWorker>().build()
                     WorkManager.getInstance(application.applicationContext).enqueue(request)
-
                 }
             })
             .build()

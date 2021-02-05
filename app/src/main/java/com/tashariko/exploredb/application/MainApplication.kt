@@ -2,15 +2,14 @@ package com.tashariko.exploredb.application
 
 import android.app.Activity
 import android.app.Service
-import android.content.Context
 import androidx.lifecycle.LifecycleOwner
 import androidx.multidex.MultiDexApplication
-import androidx.work.Configuration
-import androidx.work.CoroutineWorker
-import androidx.work.Worker
+import androidx.work.*
 import com.facebook.stetho.Stetho
+import com.tashariko.exploredb.BuildConfig
 import com.tashariko.exploredb.di.injectable.AppInjector
 import com.tashariko.exploredb.di.util.HasWorkerInjector
+import com.tashariko.exploredb.service.ConfigurationWorker
 import com.tashariko.exploredb.util.NetworkObserver
 import com.tashariko.exploredb.util.SingleLiveEvent
 import dagger.android.AndroidInjector
@@ -18,10 +17,11 @@ import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector
 import dagger.android.HasServiceInjector
 import timber.log.Timber
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
-class MainApplication: MultiDexApplication(), HasActivityInjector, HasServiceInjector,
-    HasWorkerInjector {
+class MainApplication: MultiDexApplication(), HasActivityInjector, HasServiceInjector, HasWorkerInjector {
+
 
     @Inject
     lateinit var workerDispatchingAndroidInjector: DispatchingAndroidInjector<Worker>
@@ -32,7 +32,6 @@ class MainApplication: MultiDexApplication(), HasActivityInjector, HasServiceInj
     @Inject
     lateinit var dispatchingServiceInjector: DispatchingAndroidInjector<Service>
 
-
     @Inject
     lateinit var androidWorkerInjector: DispatchingAndroidInjector<CoroutineWorker>
 
@@ -40,17 +39,15 @@ class MainApplication: MultiDexApplication(), HasActivityInjector, HasServiceInj
 
     override fun onCreate() {
         super.onCreate()
-        /**
-         * Not doing here as done in manifest
-         */
-//        AppInitializer.getInstance(this).initializeComponent(TimberInitializer::class.java)
-//        AppInitializer.getInstance(this).initializeComponent(StethoInitializer::class.java)
-
-        //Will happen after Initializer intialiases itself
+        if (BuildConfig.DEBUG) {
+            Stetho.initializeWithDefaults(this)
+            Timber.plant(Timber.DebugTree())
+        }
         Timber.i("Application Initialized")
 
         AppInjector.init(this)
     }
+
 
     public fun setNetObserver(owner: LifecycleOwner): SingleLiveEvent<Boolean> {
 
