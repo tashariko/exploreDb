@@ -9,10 +9,6 @@ class BaseForFragmentActivity : BaseActivity() {
 
     lateinit var fragType: String
 
-    protected fun handleIncomingIntent() {
-        fragType = intent.extras!!.getString(TYPE_FRAGMENT)!!
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         handleIncomingIntent()
@@ -21,7 +17,11 @@ class BaseForFragmentActivity : BaseActivity() {
         bindAndSetupUI()
     }
 
-    protected fun bindAndSetupUI() {
+    override fun handleIncomingIntent() {
+        fragType = intent.extras!!.getString(TYPE_FRAGMENT)!!
+    }
+
+    override fun bindAndSetupUI() {
         val bundle = Bundle()
         supportFragmentManager.commit {
             when (fragType) {
@@ -29,6 +29,14 @@ class BaseForFragmentActivity : BaseActivity() {
             }
         }
 
+    }
+
+    override fun vmListeners() {
+        TODO("Not yet implemented")
+    }
+
+    override fun viewlisteners() {
+        TODO("Not yet implemented")
     }
 
 

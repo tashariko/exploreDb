@@ -14,7 +14,6 @@ class LandingRepository @Inject constructor(
         private val landingRemoteDataSource: LandingRemoteDataSource){
 
     fun getData() = object : NetworkBoundRepository<ConfigurationResponse, ConfigurationResponse>() {
-        //Todo: Haandle for return true
         override fun shouldfetchDataFromDbBeforeNetwork(): Boolean {
             return false
         }

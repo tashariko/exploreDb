@@ -1,9 +1,12 @@
 package com.tashariko.exploredb.application.base
 
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.google.android.material.snackbar.Snackbar
+import com.tashariko.exploredb.R
 import dagger.android.AndroidInjection
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
@@ -26,6 +29,10 @@ open abstract class BaseActivity: AppCompatActivity(), HasSupportFragmentInjecto
 
     protected fun showToast(msg: String) {
         Toast.makeText(this,msg, Toast.LENGTH_SHORT).show()
+    }
+
+    fun showSnackbar(view: View) {
+        Snackbar.make(view, getString(R.string.generic_error_message), Snackbar.LENGTH_SHORT).show()
     }
 
     abstract fun handleIncomingIntent()

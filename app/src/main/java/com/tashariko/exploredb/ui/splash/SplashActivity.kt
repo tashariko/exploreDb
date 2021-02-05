@@ -14,4 +14,20 @@ class SplashActivity : BaseActivity() {
         ActivityLauncher.openLandingScreen(this)
 
     }
+
+    override fun handleIncomingIntent() {
+
+    }
+
+    override fun bindAndSetupUI() {
+
+    }
+
+    override fun vmListeners() {
+
+    }
+
+    override fun viewlisteners() {
+
+    }
 }
