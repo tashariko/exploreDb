@@ -26,8 +26,20 @@ class UserFragment @Inject constructor():  BaseFragment() {
         return rootview
     }
 
-    private fun bindAndSetupUI() {
+    override fun handleIncomingIntent() {
+        TODO("Not yet implemented")
+    }
 
+    override fun bindAndSetupUI() {
+        TODO("Not yet implemented")
+    }
+
+    override fun vmListeners() {
+        TODO("Not yet implemented")
+    }
+
+    override fun viewlisteners() {
+        TODO("Not yet implemented")
     }
 
 }

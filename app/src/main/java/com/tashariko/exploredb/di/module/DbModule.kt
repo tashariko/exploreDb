@@ -11,6 +11,7 @@ import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
 import com.tashariko.exploredb.application.AppConstants.DATABASE_NAME
 import com.tashariko.exploredb.database.AppDatabase
+import com.tashariko.exploredb.database.dao.TrendingItemDao
 import com.tashariko.exploredb.database.dao.UserDao
 import com.tashariko.exploredb.service.DatabaseInitialiseWorker
 import dagger.Module
@@ -45,5 +46,9 @@ class DbModule {
     @Provides
     @Singleton
     fun provideUserDao(appDatabase: AppDatabase): UserDao = appDatabase.userDao()
+
+    @Provides
+    @Singleton
+    fun provideTrendingItemDao(appDatabase: AppDatabase): TrendingItemDao = appDatabase.trendingItemDao()
 
 }

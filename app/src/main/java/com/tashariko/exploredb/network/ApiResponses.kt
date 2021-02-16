@@ -2,6 +2,7 @@ package com.tashariko.exploredb.network
 
 import androidx.annotation.Nullable
 import com.google.gson.annotations.SerializedName
+import com.tashariko.exploredb.database.entity.TrendingItem
 import com.tashariko.exploredb.database.entity.User
 
 
@@ -20,5 +21,13 @@ data class ConfigurationResponse(
 
         @SerializedName("images") val images: Images,
         @SerializedName("change_keys") val change_change_keyss: List<String>
+)
+
+data class TrendingItemResponse(
+
+        @SerializedName("total_pages") val totalPages: Long,
+        @SerializedName("total_results") val totalResults: Long,
+        @SerializedName("page") val page: Long,
+        @SerializedName("results") val results: ArrayList<TrendingItem>
 )
 

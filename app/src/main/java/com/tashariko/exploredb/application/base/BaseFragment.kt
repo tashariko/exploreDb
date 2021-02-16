@@ -5,7 +5,7 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import dagger.android.support.AndroidSupportInjection
 
-open class BaseFragment : Fragment() {
+open abstract class BaseFragment : Fragment() {
 
     lateinit var mContext: Context
     protected lateinit var rootview: View
@@ -15,6 +15,12 @@ open class BaseFragment : Fragment() {
         super.onAttach(context)
         mContext = context
     }
+
+
+    abstract fun handleIncomingIntent()
+    abstract fun bindAndSetupUI()
+    abstract fun vmListeners()
+    abstract fun viewlisteners()
 
 
 }

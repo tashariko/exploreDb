@@ -18,4 +18,5 @@
     <string name="toolbar_trending">Trending</string>
     <string name="toolbar_search">Search</string>
     <string name="retryText">Retry</string>
+    <string name="noDataText">No Data Available</string>
 </resources>

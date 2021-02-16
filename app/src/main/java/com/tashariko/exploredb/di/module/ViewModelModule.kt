@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.tashariko.exploredb.di.util.ViewModelFactory
 import com.tashariko.exploredb.di.util.ViewModelKey
+import com.tashariko.exploredb.ui.main.trending.TrendingViewModel
 import com.tashariko.exploredb.ui.splash.SplashViewModel
 import dagger.Binds
 import dagger.Module
@@ -16,6 +17,11 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(SplashViewModel::class)
     abstract fun bindSplashViewModel(viewModel: SplashViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(TrendingViewModel::class)
+    abstract fun bindTrendingViewModel(viewModel: TrendingViewModel): ViewModel
 
     @Binds
     abstract fun bindViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory

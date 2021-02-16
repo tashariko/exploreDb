@@ -4,11 +4,16 @@ import android.os.Bundle
 import com.tashariko.exploredb.R
 import com.tashariko.exploredb.application.base.BaseActivity
 import com.tashariko.exploredb.databinding.ActivityMainBinding
+import com.tashariko.exploredb.ui.main.trending.TrendingFragment
 import com.tashariko.exploredb.ui.main.user.UserFragment
+import javax.inject.Inject
 
 class MainActivity : BaseActivity() {
 
     lateinit var binding: ActivityMainBinding
+
+    @Inject
+    lateinit var trendingFragment: TrendingFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,10 +30,9 @@ class MainActivity : BaseActivity() {
     }
 
     override fun bindAndSetupUI() {
-        var fragmentUser = UserFragment()
         supportFragmentManager
                 .beginTransaction()
-                .replace(R.id.fragmentContainer, fragmentUser, "CustomFragment.TAG")
+                .replace(R.id.fragmentContainer, trendingFragment, "CustomFragment.TAG")
                 .commitAllowingStateLoss()
     }
 
