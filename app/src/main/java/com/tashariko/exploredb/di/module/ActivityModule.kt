@@ -1,6 +1,7 @@
 package com.tashariko.exploredb.di.module
 
 import com.tashariko.exploredb.ui.main.MainActivity
+import com.tashariko.exploredb.ui.main.detail.ItemDetailActivity
 import com.tashariko.exploredb.ui.splash.LandingActivity
 import com.tashariko.exploredb.ui.splash.SplashActivity
 import dagger.Module
@@ -17,5 +18,9 @@ abstract class ActivityModule {
 
     @ContributesAndroidInjector
     abstract fun contributeSplashActivity(): SplashActivity
+
+    @ContributesAndroidInjector
+    abstract fun contributeItemDetailActivity(): ItemDetailActivity
+
 
 }

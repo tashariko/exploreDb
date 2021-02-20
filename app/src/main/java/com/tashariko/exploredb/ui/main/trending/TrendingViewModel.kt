@@ -1,10 +1,7 @@
 package com.tashariko.exploredb.ui.main.trending
 
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.tashariko.exploredb.database.entity.TrendingItem
 import com.tashariko.exploredb.network.result.ApiResult
 import kotlinx.coroutines.*
@@ -19,7 +16,6 @@ class TrendingViewModel @Inject constructor(): ViewModel(){
     @Inject
     lateinit var repository: TrendingRepository
 
-
     private val _tempTrendingLiveData = MutableLiveData<ApiResult<List<TrendingItem>>>()
     val trendingLiveData: LiveData<ApiResult<List<TrendingItem>>>
         get() = _tempTrendingLiveData
@@ -33,5 +29,11 @@ class TrendingViewModel @Inject constructor(): ViewModel(){
             }
         }
     }
+
+
+    //POINTER: Will start calling api as soon as we start observing trendingItem
+//    var trendingItem: LiveData<ApiResult<List<TrendingItem>>> = liveData {
+//        emitSource(repository.getTrendingItems().asLiveData())
+//    }
 
 }

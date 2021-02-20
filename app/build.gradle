@@ -98,4 +98,7 @@ dependencies {
 
     //to fix the error happening at the starting of the app
     implementation 'org.conscrypt:conscrypt-android:2.4.0'
+
+    //implementation "androidx.paging:paging-runtime:$rootProject.paging_version"
+
 }

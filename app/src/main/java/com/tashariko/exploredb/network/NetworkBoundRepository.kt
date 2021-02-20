@@ -24,12 +24,12 @@ abstract class NetworkBoundRepository<RESULT, REQUEST> {
 
         // emit(someValue) is similar to myData.value = someValue whereas
         // emitSource(someLiveValue) is similar to myData = someLiveValue.
-        emit(ApiResult.loading<RESULT>())
+        emit(ApiResult.loading())
 
         if(shouldfetchDataFromDbBeforeNetwork()) {
             databaseQuery.invoke()?.let {flow ->
                 val source = flow.map { ApiResult.success(it) }
-                emit(ApiResult.loading<RESULT>(source.first().data))
+                emit(ApiResult.loading(source.first().data))
             }?: run {
                 emit(ApiResult.error<RESULT>(ErrorType(ErrorType.Type.Generic), null))
                 throw Exception("Provide datebaseQuery as shouldfetchDataFromDbBeforeNetwork is true")

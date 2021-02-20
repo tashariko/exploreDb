@@ -1,6 +1,7 @@
 package com.tashariko.exploredb.ui.main
 
 import android.os.Bundle
+import android.util.Log
 import com.tashariko.exploredb.R
 import com.tashariko.exploredb.application.base.BaseActivity
 import com.tashariko.exploredb.databinding.ActivityMainBinding

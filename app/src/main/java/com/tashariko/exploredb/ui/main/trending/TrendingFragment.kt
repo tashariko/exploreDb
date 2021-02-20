@@ -3,6 +3,7 @@ package com.tashariko.exploredb.ui.main.trending
 import android.content.Context
 import android.os.Bundle
 import android.util.AttributeSet
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -59,35 +60,33 @@ class TrendingFragment @Inject constructor(): BaseFragment()  {
     }
 
     override fun vmListeners() {
-        lifecycleScope.launchWhenStarted {
-            viewModel.trendingLiveData.observe(viewLifecycleOwner, Observer { listResource ->
-                binding.swipeRefreshLayout.isRefreshing = false
-                when (listResource.status) {
-                    ApiResult.Status.LOADING -> if (listResource.data == null || listResource.data.isEmpty()) {
-                        configureView(AppConstants.LOADING_LAYOUT, AppConstants.VIEW_FROM_LOADING)
-                    } else {
-                        configureView(AppConstants.DATA_LAYOUT, AppConstants.VIEW_FROM_LOADING)
-                        adapter.submitList(listResource.data as ArrayList<TrendingItem>)
-                    }
-                    ApiResult.Status.SUCCESS -> if (listResource.data!!.isNotEmpty()) {
-                        configureView(AppConstants.DATA_LAYOUT, AppConstants.VIEW_FROM_API)
-                        adapter.submitList(listResource.data as ArrayList<TrendingItem>)
-                    } else if (adapter.itemCount == 0) {
-                        configureView(AppConstants.NO_DATA_LAYOUT, AppConstants.VIEW_FROM_API)
-                    }
-                    ApiResult.Status.ERROR -> if (!UtilityHelper.showDataInError()) {
+        viewModel.trendingLiveData.observe(viewLifecycleOwner, Observer { listResource ->
+            binding.swipeRefreshLayout.isRefreshing = false
+            when (listResource.status) {
+                ApiResult.Status.LOADING -> if (listResource.data == null || listResource.data.isEmpty()) {
+                    configureView(AppConstants.LOADING_LAYOUT, AppConstants.VIEW_FROM_LOADING)
+                } else {
+                    configureView(AppConstants.DATA_LAYOUT, AppConstants.VIEW_FROM_LOADING)
+                    adapter.submitList(listResource.data as ArrayList<TrendingItem>)
+                }
+                ApiResult.Status.SUCCESS -> if (listResource.data!!.isNotEmpty()) {
+                    configureView(AppConstants.DATA_LAYOUT, AppConstants.VIEW_FROM_API)
+                    adapter.submitList(listResource.data as ArrayList<TrendingItem>)
+                } else if (adapter.itemCount == 0) {
+                    configureView(AppConstants.NO_DATA_LAYOUT, AppConstants.VIEW_FROM_API)
+                }
+                ApiResult.Status.ERROR -> if (!UtilityHelper.showDataInError()) {
+                    configureView(AppConstants.ERROR_LAYOUT, AppConstants.VIEW_FROM_ERROR)
+                } else {
+                    if (listResource.data == null || listResource.data != null && listResource.data.isEmpty()) {
                         configureView(AppConstants.ERROR_LAYOUT, AppConstants.VIEW_FROM_ERROR)
                     } else {
-                        if (listResource.data == null || listResource.data != null && listResource.data.isEmpty()) {
-                            configureView(AppConstants.ERROR_LAYOUT, AppConstants.VIEW_FROM_ERROR)
-                        } else {
-                            configureView(AppConstants.DATA_LAYOUT, AppConstants.VIEW_FROM_ERROR)
-                            adapter.submitList(listResource.data as ArrayList<TrendingItem>)
-                        }
+                        configureView(AppConstants.DATA_LAYOUT, AppConstants.VIEW_FROM_ERROR)
+                        adapter.submitList(listResource.data as ArrayList<TrendingItem>)
                     }
                 }
-            })
-        }
+            }
+        })
 
         viewModel.getTrendingItems()
     }
@@ -114,7 +113,5 @@ class TrendingFragment @Inject constructor(): BaseFragment()  {
             }
         }
     }
-
-
 
 }
