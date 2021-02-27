@@ -7,6 +7,18 @@
     android:padding="@dimen/_10dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
+        android:background="@color/textLightColor"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/titleView"/>
+
     <TextView
         android:id="@+id/titleView"
         android:layout_width="wrap_content"
@@ -14,7 +26,19 @@
         android:textColor="@color/appTextColor"
         android:textStyle="bold"
         android:text="Title"
-        app:layout_constraintTop_toTopOf="parent"
+        android:textSize="@dimen/font_big"
+        app:layout_constraintTop_toBottomOf="@id/imageView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:id="@+id/overviewView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/textLightColor"
+        android:text="Title"
+        android:textSize="@dimen/font_normal"
+        app:layout_constraintTop_toBottomOf="@id/titleView"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
 

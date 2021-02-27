@@ -16,4 +16,5 @@
     <dimen name="_35dp">35sp</dimen>
     <dimen name="_50dp">50dp</dimen>
     <dimen name="generic_margin_padding">10dp</dimen>
+    <dimen name="_100dp">100dp</dimen>
 </resources>

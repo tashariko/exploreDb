@@ -1,7 +1,5 @@
 package com.tashariko.exploredb.network
 
-import androidx.paging.PagingSource
-import androidx.paging.PagingState
 import com.tashariko.exploredb.network.result.ErrorType
 import com.tashariko.exploredb.network.result.ApiResult
 import kotlinx.coroutines.Dispatchers
@@ -85,39 +83,3 @@ abstract class NetworkBoundRepository<RESULT, REQUEST> {
         return true
     }
 }
-
-//
-//
-//private const val UNSPLASH_STARTING_PAGE_INDEX = 1
-//
-//class NBRPagingSource<K : Any,V: Any, REQUEST, RESULT>(
-//        val networkCall: suspend () -> ApiResult<REQUEST>,
-//        parseNetworkResponse: (REQUEST) -> ApiResult<RESULT>
-//): PagingSource<K, V>() {
-//
-//
-//    override fun getRefreshKey(state: PagingState<K, V>): K? {
-//        TODO("Not yet implemented")
-//    }
-//
-//    override suspend fun load(params: PagingSource.LoadParams<K>): PagingSource.LoadResult<K, V> {
-//        val position = params.key ?: UNSPLASH_STARTING_PAGE_INDEX
-//
-//        return try {
-//            val response = networkCall.invoke()
-//            val data = response.data
-//
-//            LoadResult.Page(
-//                    data = data,
-//                    prevKey = if (position == UNSPLASH_STARTING_PAGE_INDEX) null else position - 1,
-//                    nextKey = if (photos.isEmpty()) null else position + 1
-//            )
-//        } catch (exception: IOException) {
-//            LoadResult.Error(exception)
-//        } catch (exception: HttpException) {
-//            LoadResult.Error(exception)
-//        }
-//    }
-//
-//
-//}

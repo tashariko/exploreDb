@@ -55,6 +55,9 @@ class TrendingFragment @Inject constructor(): BaseFragment()  {
 
     override fun bindAndSetupUI() {
         binding.recyclerView.layoutManager = LinearLayoutManager(requireActivity())
+
+        adapter.setBaseImageUrl(viewModel.getImagePath(requireContext()))
+
         binding.errorLoadingContainerView.addDataView(binding.swipeRefreshLayout, javaClass.simpleName)
         binding.recyclerView.adapter = adapter
     }

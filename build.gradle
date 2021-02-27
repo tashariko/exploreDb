@@ -33,7 +33,7 @@ buildscript {
         startupRuntimeVersion = '1.0.0'
         daggerVersion = '2.23.2'
         dataStoreVersion = '1.0.0-alpha06'
-
+        pagingVersion = '2.1.2'
     }
 
     repositories {

@@ -1,23 +1,18 @@
 package com.tashariko.exploredb.service
 
 import android.content.Context
-import androidx.datastore.preferences.protobuf.Api
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
-import com.facebook.stetho.inspector.domstorage.SharedPreferencesHelper
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.google.gson.reflect.TypeToken
 import com.tashariko.exploredb.application.AppConstants
-import com.tashariko.exploredb.database.entity.User
 import com.tashariko.exploredb.di.util.AndroidWorkerInjection
 import com.tashariko.exploredb.network.result.ApiResult
 import com.tashariko.exploredb.ui.splash.LandingRepository
 import com.tashariko.exploredb.util.SharedPreferenceHelper
-import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
 import timber.log.Timber
-import java.lang.Exception
 import javax.inject.Inject
 
 class ConfigurationWorker constructor(context: Context, workerParams: WorkerParameters) : CoroutineWorker(context, workerParams) {
@@ -42,16 +37,16 @@ class ConfigurationWorker constructor(context: Context, workerParams: WorkerPara
             return Result.failure()
         }
 
-        val item = repository.getData().first {
+        val status = repository.getData().first {
             it.status == ApiResult.Status.SUCCESS || it.status == ApiResult.Status.ERROR
         }
 
         Timber.i("HAHA__done")
-        return if(item.status == ApiResult.Status.SUCCESS){
+        return if(status.status == ApiResult.Status.SUCCESS){
             Timber.i("HAHA__success")
             val gson = Gson()
             val type = object : TypeToken<JsonObject>() {}.type
-            val configString =  gson.toJson(item.data!!, type)
+            val configString =  gson.toJson(status.data!!, type)
             SharedPreferenceHelper.putInSharedPreference(applicationContext, AppConstants.SP_KEY_CONFIG, configString)
             Result.success()
 
