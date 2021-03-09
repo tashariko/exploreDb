@@ -1,22 +1,19 @@
 package com.tashariko.exploredb.di.module
 
 import android.app.Application
-import android.content.Context
-import android.util.Log
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
 import com.tashariko.exploredb.application.AppConstants.DATABASE_NAME
 import com.tashariko.exploredb.database.AppDatabase
 import com.tashariko.exploredb.database.dao.TrendingItemDao
+import com.tashariko.exploredb.database.dao.TrendingRemoteKeysDao
 import com.tashariko.exploredb.database.dao.UserDao
 import com.tashariko.exploredb.service.DatabaseInitialiseWorker
 import dagger.Module
 import dagger.Provides
-import timber.log.Timber
 import javax.inject.Singleton
 
 
@@ -51,4 +48,7 @@ class DbModule {
     @Singleton
     fun provideTrendingItemDao(appDatabase: AppDatabase): TrendingItemDao = appDatabase.trendingItemDao()
 
+    @Provides
+    @Singleton
+    fun provideTrendingRemtoteKeysDao(appDatabase: AppDatabase): TrendingRemoteKeysDao = appDatabase.trendingRemtoteKeysDao()
 }

@@ -5,13 +5,15 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.tashariko.exploredb.database.converters.Converters
 import com.tashariko.exploredb.database.dao.TrendingItemDao
+import com.tashariko.exploredb.database.dao.TrendingRemoteKeysDao
 import com.tashariko.exploredb.database.dao.UserDao
 import com.tashariko.exploredb.database.entity.TrendingItem
+import com.tashariko.exploredb.database.entity.TrendingRemtoteKey
 import com.tashariko.exploredb.database.entity.User
 
 
 @Database(
-        entities = [User::class, TrendingItem::class],
+        entities = [User::class, TrendingItem::class, TrendingRemtoteKey::class],
     version = 1,
     exportSchema = false
 )
@@ -19,4 +21,5 @@ import com.tashariko.exploredb.database.entity.User
 abstract class AppDatabase : RoomDatabase() {
     abstract fun userDao(): UserDao
     abstract fun trendingItemDao(): TrendingItemDao
+    abstract fun trendingRemtoteKeysDao(): TrendingRemoteKeysDao
 }

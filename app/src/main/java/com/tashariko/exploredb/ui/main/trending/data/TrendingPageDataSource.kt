@@ -1,11 +1,15 @@
 package com.tashariko.exploredb.ui.main.trending.data
 
 import androidx.paging.PageKeyedDataSource
+import androidx.paging.PagingSource
+import androidx.paging.PagingState
 import com.tashariko.exploredb.database.dao.TrendingItemDao
 import com.tashariko.exploredb.database.entity.TrendingItem
 import com.tashariko.exploredb.network.NetworkBoundRepository
 import com.tashariko.exploredb.network.TrendingItemResponse
 import com.tashariko.exploredb.network.result.ApiResult
+import com.tashariko.exploredb.network.result.ErrorType
+import com.tashariko.exploredb.util.ApiThrowable
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
@@ -15,83 +19,43 @@ import javax.inject.Inject
 /**
  * Data source for Trending pagination via paging library
  */
-class TrendingPageDataSource @Inject constructor(
-        private val dataSource: TrendingRemoteDataSource,
-        private val dao: TrendingItemDao,
-        private val scope: CoroutineScope) : PageKeyedDataSource<Int, TrendingItem>() {
 
-    override fun loadInitial(params: LoadInitialParams<Int>, callback: LoadInitialCallback<Int, TrendingItem>) {
-        Timber.i("Load--Initial")
-        fetchData(1, params.requestedLoadSize) {
-            callback.onResult(it, null, 2)
-        }
+val DEFAULT_PAGE_INDEX = 1
+
+class TrendingPageDataSource constructor(val trendingRemoteDataSource: TrendingRemoteDataSource): PagingSource<Int, TrendingItem>() {
+
+
+    override fun getRefreshKey(state: PagingState<Int, TrendingItem>): Int? {
+        TODO("Not yet implemented")
     }
 
-    override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<Int, TrendingItem>) {
-        Timber.i("Load--After")
-        val page = params.key
-        fetchData(page, params.requestedLoadSize) {
-            callback.onResult(it, page + 1)
-        }
-    }
+    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, TrendingItem> {
+        Timber.i("Load Started")
 
-    override fun loadBefore(params: LoadParams<Int>, callback: LoadCallback<Int, TrendingItem>) {
-        Timber.i("Load--Before")
-        val page = params.key
-        fetchData(page, params.requestedLoadSize) {
-            callback.onResult(it, page - 1)
-        }
-    }
+        return try {
+            // Start refresh at page 1 if undefined.
+            val nextPage = params.key ?: DEFAULT_PAGE_INDEX
+            val loadSize = params.loadSize
+            val response = trendingRemoteDataSource.getProductList(nextPage)
 
-    private fun fetchData(page: Int, pageSize: Int, callback: (List<TrendingItem>) -> Unit) {
-        scope.launch(getJobErrorHandler()) {
-            val response = dataSource.getProductList(page, pageSize )
-            if (response.status == ApiResult.Status.SUCCESS) {
-                val results = response.data!!.results
-                dao.insertAll(results)
-                callback(results)
-            } else if (response.status == ApiResult.Status.ERROR) {
-                response.errorType?.message?.let {
-                    postError(it)
-                }?: run {
-                    postError("Error occured")
+            if(response.status == ApiResult.Status.SUCCESS){
+                LoadResult.Page(
+                    data = response.data!!.results,
+                    prevKey = if (nextPage == 1) null else nextPage - 1,
+                    nextKey = nextPage + 1
+                )
+            }else{
+                if(response.errorType!!.type == ErrorType.Type.Generic) {
+                    LoadResult.Error(ApiThrowable("Error in api: GENERIC"))
+                }else{
+                    LoadResult.Error(ApiThrowable("Error in api: BACKEND"))
                 }
             }
+
+        } catch (e: Exception) {
+            LoadResult.Error(e)
+
         }
-    }
-
-//    fun getTrendingItems(page: Long, pageSize: Int, callback: (List<TrendingItem>) -> Unit) = object : NetworkBoundRepository<List<TrendingItem>, TrendingItemResponse>() {
-//
-//        override fun shouldfetchDataFromDbBeforeNetwork(): Boolean {
-//            return false
-//        }
-//
-//        override fun shouldStoreDataInDbAfterNetwork(): Boolean {
-//            return false
-//        }
-//    }.flowData(
-//            databaseQuery = {
-//                null
-//            },
-//            networkCall = {
-//                trendingRemoteDataSource.getProductList(page, pageSize)
-//            },
-//            saveCallResult = {
-//
-//            },
-//            parseNetworkResponse = {
-//                ApiResult.success(it.results)
-//            }
-//    )
-
-    private fun getJobErrorHandler() = CoroutineExceptionHandler { _, e ->
-        postError(e.message ?: e.toString())
-    }
-
-    private fun postError(message: String) {
-        Timber.e("An error happened: $message")
-        // TODO network error handling
-        //networkState.postValue(NetworkState.FAILED)
     }
 
 }

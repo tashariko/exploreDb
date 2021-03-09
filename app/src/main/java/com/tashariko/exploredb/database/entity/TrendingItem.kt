@@ -58,3 +58,7 @@ data class TrendingItem (
 //        @SerializedName("media_type")
 //        val mediaType: String
 ): Parcelable
+
+@Entity(tableName = "trending_remote_key")
+@Parcelize
+data class TrendingRemtoteKey(@PrimaryKey val repoId: String, val prevKey: Int?, val nextKey: Int?): Parcelable

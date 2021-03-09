@@ -64,6 +64,7 @@ dependencies {
     implementation "androidx.paging:paging-runtime:$rootProject.pagingVersion"
     implementation "androidx.room:room-runtime:$rootProject.roomVersion"
     implementation "androidx.room:room-ktx:$rootProject.roomVersion"
+    kapt "androidx.room:room-compiler:$rootProject.roomVersion"
     implementation "androidx.work:work-runtime-ktx:$rootProject.workVersion"
     implementation "androidx.datastore:datastore-preferences:$rootProject.dataStoreVersion"
     implementation "com.google.android.material:material:$rootProject.materialVersion"

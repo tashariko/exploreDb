@@ -1,38 +1,29 @@
-package com.tashariko.exploredb.ui.main.trending.ui
+package com.tashariko.exploredb.ui.main.trending.ui.adapter
 
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.paging.PagedList
-import androidx.paging.PagedListAdapter
+import androidx.annotation.NonNull
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.api.load
 import com.tashariko.exploredb.database.entity.TrendingItem
+import com.tashariko.exploredb.databinding.ListItemLoadingErrorBinding
 import com.tashariko.exploredb.databinding.ListItemTrendingBinding
 import com.tashariko.exploredb.ui.main.detail.ItemDetailActivity
-import java.util.ArrayList
 
-class TrendingAdapter : PagedListAdapter<TrendingItem, TrendingViewHolder>(CustomDiffCallback()){
+class TrendingAdapter : PagingDataAdapter<TrendingItem, TrendingViewHolder>(
+    CustomDiffCallback()
+){
 
     private lateinit var imagePaths: Triple<String, String, String>
-    //private var dataList = ArrayList<TrendingItem>()
-
-//    fun submitList(arrayList: ArrayList<TrendingItem>) {
-//        dataList.clear()
-//        dataList.addAll(arrayList)
-//        notifyDataSetChanged()
-//    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TrendingViewHolder {
         return TrendingViewHolder(
             ListItemTrendingBinding.inflate(LayoutInflater.from(parent.context), parent, false),
             imagePaths
         )
-    }
-
-    override fun getItemCount(): Int {
-        return currentList?.size ?: 0
     }
 
     override fun onBindViewHolder(holder: TrendingViewHolder, position: Int) {

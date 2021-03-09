@@ -19,7 +19,7 @@ buildscript {
         lifecycleVersion = '2.2.0'
         materialVersion = '1.2.1'
         recyclerViewVersion = '1.1.0'
-        roomVersion = '2.2.5'
+        roomVersion = '2.3.0-alpha02'
         workVersion = '2.4.0'
         gsonVersion = '2.8.2'
         okhttp = '4.7.2'
@@ -33,7 +33,7 @@ buildscript {
         startupRuntimeVersion = '1.0.0'
         daggerVersion = '2.23.2'
         dataStoreVersion = '1.0.0-alpha06'
-        pagingVersion = '2.1.2'
+        pagingVersion = '3.0.0-beta01'
     }
 
     repositories {

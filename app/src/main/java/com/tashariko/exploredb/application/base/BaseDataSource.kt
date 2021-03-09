@@ -19,12 +19,15 @@ abstract class BaseDataSource {
             val body = response.body()
             if (body != null) return ApiResult.success(body)
         }
-        Timber.e("${response.code()}")
+
         var msg = ""
-        response.errorBody()?.let {
-            val jsonObject: JsonObject = JsonParser().parse(it.string()).asJsonObject
-            msg = jsonObject.get("err").asString
-        }
+        /**
+         * If want to handle some message from backend
+         */
+//        response.errorBody()?.let {
+//            val jsonObject: JsonObject = JsonParser().parse(it.string()).asJsonObject
+//            msg = jsonObject.get("err").asString
+//        }
         return if(msg.isNullOrEmpty()){
             ApiResult.error( errorType = ErrorType(ErrorType.Type.Backend, "Error: ${response.errorBody()} ${response.message()}"))
         }else{
