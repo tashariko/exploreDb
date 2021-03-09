@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.tashariko.exploredb.di.util.ViewModelFactory
 import com.tashariko.exploredb.di.util.ViewModelKey
-import com.tashariko.exploredb.ui.main.trending.TrendingViewModel
+import com.tashariko.exploredb.ui.main.trending.ui.TrendingViewModel
 import com.tashariko.exploredb.ui.splash.SplashViewModel
 import dagger.Binds
 import dagger.Module

@@ -7,6 +7,7 @@ import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.readystatesoftware.chuck.ChuckInterceptor
 import com.tashariko.exploredb.BuildConfig
+import com.tashariko.exploredb.di.CoroutineScropeIO
 import com.tashariko.exploredb.network.RequestInterceptor
 import dagger.Module
 import dagger.Provides
@@ -33,6 +34,11 @@ class AppModule {
     @Provides
     @Singleton
     fun providesRequestInterceptor(application: Application): RequestInterceptor = RequestInterceptor(application.applicationContext, BuildConfig.API_DEVELOPER_TOKEN)
+
+
+    @CoroutineScropeIO
+    @Provides
+    fun provideCoroutineScopeIO() = CoroutineScope(Dispatchers.IO)
 
     @Provides
     @Singleton

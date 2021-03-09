@@ -3,13 +3,14 @@ package com.tashariko.exploredb.application
 import android.app.Activity
 import android.app.Service
 import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.Observer
+import androidx.lifecycle.asLiveData
 import androidx.multidex.MultiDexApplication
 import androidx.work.*
 import com.facebook.stetho.Stetho
 import com.tashariko.exploredb.BuildConfig
 import com.tashariko.exploredb.di.injectable.AppInjector
 import com.tashariko.exploredb.di.util.HasWorkerInjector
-import com.tashariko.exploredb.service.ConfigurationWorker
 import com.tashariko.exploredb.util.NetworkObserver
 import com.tashariko.exploredb.util.SingleLiveEvent
 import dagger.android.AndroidInjector
@@ -47,18 +48,18 @@ class MainApplication: MultiDexApplication(), HasActivityInjector, HasServiceInj
 
         AppInjector.init(this)
     }
-
-
-    public fun setNetObserver(owner: LifecycleOwner): SingleLiveEvent<Boolean> {
-
-        var netListener = SingleLiveEvent<Boolean>()
-
-        NetworkObserver.getNetLiveData(this).observe(owner, androidx.lifecycle.Observer {
-            netListener.postValue(it)
-        })
-
-        return netListener
-    }
+//
+//
+//    public fun setNetObserver(owner: LifecycleOwner): SingleLiveEvent<Boolean> {
+//
+//        var netListener = SingleLiveEvent<Boolean>()
+//
+//        NetworkObserver.getNetLiveData(this).asLiveData().observe(owner, Observer {
+//            netListener.postValue(it)
+//        })
+//
+//        return netListener
+//    }
 
     override fun serviceInjector(): AndroidInjector<Service> = dispatchingServiceInjector
 

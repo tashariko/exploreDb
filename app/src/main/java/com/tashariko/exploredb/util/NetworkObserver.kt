@@ -8,13 +8,14 @@ import android.net.NetworkRequest
 import android.os.Build
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.flow
 
 object NetworkObserver: ConnectivityManager.NetworkCallback() {
 
-    private val netLiveData: MutableLiveData<Boolean> = MutableLiveData()
+    private val netLiveData: MutableStateFlow<Boolean> = MutableStateFlow(true)
 
-    fun getNetLiveData(context: Context): LiveData<Boolean> {
+    fun getNetLiveData(context: Context): MutableStateFlow<Boolean> {
         val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
@@ -36,17 +37,17 @@ object NetworkObserver: ConnectivityManager.NetworkCallback() {
             }
         }
 
-        netLiveData.postValue(isNetAvailable)
+        netLiveData.value = isNetAvailable
 
         return netLiveData
     }
 
     override fun onAvailable(network: Network?) {
-        netLiveData.postValue(true)
+        netLiveData.value = true
     }
 
     override fun onLost(network: Network?) {
-        netLiveData.postValue(false)
+        netLiveData.value = false
     }
 }
 //

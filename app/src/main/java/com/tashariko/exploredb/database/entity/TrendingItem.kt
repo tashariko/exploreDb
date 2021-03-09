@@ -14,46 +14,47 @@ data class TrendingItem (
         @PrimaryKey
         @SerializedName("id")
         val id: Long,
-
-        @SerializedName("backdrop_path")
-        val backdropPath: String,
-
-        @SerializedName("genre_ids")
-        val genreIDS: ArrayList<Long>,
-
-        @SerializedName("original_language")
-        val originalLanguage: String,
+//
+//        @SerializedName("backdrop_path")
+//        val backdropPath: String,
+//
+//        @SerializedName("genre_ids")
+//        val genreIDS: ArrayList<Long>,
+//
+//        @SerializedName("original_language")
+//        val originalLanguage: String,
 
         @SerializedName("original_title")
-        val originalTitle: String,
+        val originalTitle: String? = null,
 
         @SerializedName("poster_path")
-        val posterPath: String,
-
-        @SerializedName("title")
-        val title: String,
-
-        @SerializedName("vote_average")
-        val voteAverage: Double,
-
-        @SerializedName("vote_count")
-        val voteCount: Long,
+        val posterPath: String? = null,
 
         @SerializedName("overview")
-        val overview: String,
-
-        @SerializedName("release_date")
-        val releaseDate: String,
-
-        @SerializedName("video")
-        val video: Boolean,
-
-        @SerializedName("adult")
-        val adult: Boolean,
-
-        @SerializedName("popularity")
-        val popularity: Double,
-
-        @SerializedName("media_type")
-        val mediaType: String
+        val overview: String? = null
+//
+//
+//        @SerializedName("title")
+//        val title: String,
+//
+//        @SerializedName("vote_average")
+//        val voteAverage: Double,
+//
+//        @SerializedName("vote_count")
+//        val voteCount: Long,
+//
+//        @SerializedName("release_date")
+//        val releaseDate: String,
+//
+//        @SerializedName("video")
+//        val video: Boolean,
+//
+//        @SerializedName("adult")
+//        val adult: Boolean,
+//
+//        @SerializedName("popularity")
+//        val popularity: Double,
+//
+//        @SerializedName("media_type")
+//        val mediaType: String
 ): Parcelable

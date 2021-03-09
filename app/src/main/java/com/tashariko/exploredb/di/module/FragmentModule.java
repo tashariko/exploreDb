@@ -1,7 +1,7 @@
 package com.tashariko.exploredb.di.module;
 
 
-import com.tashariko.exploredb.ui.main.trending.TrendingFragment;
+import com.tashariko.exploredb.ui.main.trending.ui.TrendingFragment;
 import com.tashariko.exploredb.ui.main.user.UserFragment;
 
 import dagger.Module;
