@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadState
 import androidx.paging.LoadStateAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -30,6 +31,7 @@ class TrendingFragment @Inject constructor(): BaseFragment()  {
         TrendingAdapter()
     }
 
+    @ExperimentalPagingApi
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentTrendingBinding.inflate(inflater, container, false)
         rootview = binding.root
@@ -58,6 +60,7 @@ class TrendingFragment @Inject constructor(): BaseFragment()  {
         })
     }
 
+    @ExperimentalPagingApi
     override fun vmListeners() {
         viewModel.fetchTrendingList().observe(viewLifecycleOwner, Observer { listResource ->
             listResource?.let {

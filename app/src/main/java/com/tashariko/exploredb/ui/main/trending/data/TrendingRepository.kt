@@ -2,30 +2,46 @@ package com.tashariko.exploredb.ui.main.trending.data
 
 import androidx.paging.*
 import com.tashariko.exploredb.application.base.BaseDataSource
+import com.tashariko.exploredb.database.dao.TrendingItemDao
+import com.tashariko.exploredb.database.dao.TrendingRemoteKeysDao
 import com.tashariko.exploredb.database.entity.TrendingItem
+import com.tashariko.exploredb.database.entity.TrendingRemtoteKey
 import com.tashariko.exploredb.network.apiservices.MiscApiService
 import com.tashariko.exploredb.ui.main.trending.ui.DEFAULT_PAGE_SIZE
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class TrendingRepository @Inject constructor(val remoteDataSource: TrendingRemoteDataSource) {
+class TrendingRepository @Inject constructor(val remoteDataSource: TrendingRemoteDataSource, val trendingItemDao: TrendingItemDao, val trendingRemoteKeysDao: TrendingRemoteKeysDao) {
 
-    fun getTrendingItems(): Flow<PagingData<TrendingItem>> =
+    fun getTrendingItemsWithNoDb(): Flow<PagingData<TrendingItem>> =
         Pager(
             config = getDefaultPageConfig(),
             pagingSourceFactory = { TrendingPageDataSource(remoteDataSource) }
         ).flow
 
+    @ExperimentalPagingApi
+    fun getTrendingItemsWithDb(): Flow<PagingData<TrendingItem>> {
+
+        val pagingSourceFactory = { trendingItemDao.getAllItems() }
+        return Pager(
+                config = getDefaultPageConfig(),
+                pagingSourceFactory = pagingSourceFactory,
+                remoteMediator = TrendingMediator(remoteDataSource, trendingItemDao, trendingRemoteKeysDao)
+        ).flow
+    }
+
 
     private fun getDefaultPageConfig(): PagingConfig {
-        return PagingConfig(pageSize = DEFAULT_PAGE_SIZE, enablePlaceholders = false)
+        //dont change initialLoadSize, its making it to go for infinite calls
+        return PagingConfig(pageSize = DEFAULT_PAGE_SIZE, enablePlaceholders = false, initialLoadSize = 20)
     }
+
 }
 
 
 class TrendingRemoteDataSource @Inject constructor(private val apiService: MiscApiService) : BaseDataSource() {
 
-    suspend fun getProductList(page: Int)  = getResult {
-        apiService.getTrendingItems(page)
+    suspend fun getProductList(page: Int, pageSize: Int)  = getResult {
+        apiService.getTrendingItems(page, pageSize)
     }
 }

@@ -30,7 +30,7 @@ interface TrendingRemoteKeysDao {
     suspend fun insertAll(remoteKey: List<TrendingRemtoteKey>)
 
     @Query("SELECT * FROM trending_remote_key WHERE repoId = :id")
-    suspend fun remoteKeysTrendingId(id: String): TrendingRemtoteKey?
+    suspend fun remoteKeysTrendingId(id: Long): TrendingRemtoteKey?
 
     @Query("DELETE FROM trending_remote_key")
     suspend fun clearRemoteKeys()

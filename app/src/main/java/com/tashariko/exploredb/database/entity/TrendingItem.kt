@@ -11,7 +11,9 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class TrendingItem (
 
-        @PrimaryKey
+        @PrimaryKey (autoGenerate = true)
+        val localId: Long? = null,
+
         @SerializedName("id")
         val id: Long,
 //
@@ -61,4 +63,4 @@ data class TrendingItem (
 
 @Entity(tableName = "trending_remote_key")
 @Parcelize
-data class TrendingRemtoteKey(@PrimaryKey val repoId: String, val prevKey: Int?, val nextKey: Int?): Parcelable
+data class TrendingRemtoteKey(@PrimaryKey (autoGenerate = true) val localId: Long? = null, val repoId: Long, val prevKey: Int?, val nextKey: Int?): Parcelable
