@@ -21,8 +21,11 @@ import javax.inject.Inject
 
 val DEFAULT_PAGE_INDEX = 1
 
-class TrendingPageDataSource constructor(val trendingRemoteDataSource: TrendingRemoteDataSource): PagingSource<Int, TrendingItem>() {
 
+/**
+ * Handling without pagination
+ */
+class TrendingPageDataSource constructor(val trendingRemoteDataSource: TrendingRemoteDataSource): PagingSource<Int, TrendingItem>() {
 
     @ExperimentalPagingApi
     override fun getRefreshKey(state: PagingState<Int, TrendingItem>): Int? {
