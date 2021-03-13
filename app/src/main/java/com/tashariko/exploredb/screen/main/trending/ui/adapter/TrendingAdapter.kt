@@ -1,4 +1,4 @@
-package com.tashariko.exploredb.ui.main.trending.ui.adapter
+package com.tashariko.exploredb.screen.main.trending.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,11 +6,10 @@ import android.widget.Toast
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import coil.api.load
 import com.tashariko.exploredb.application.AppConstants
 import com.tashariko.exploredb.database.entity.TrendingItem
 import com.tashariko.exploredb.databinding.ListItemTrendingBinding
-import com.tashariko.exploredb.ui.main.movieDetail.MovieDetailActivity
+import com.tashariko.exploredb.screen.main.movieDetail.MovieDetailActivity
 
 class TrendingAdapter : PagingDataAdapter<TrendingItem, TrendingViewHolder>(
     CustomDiffCallback()

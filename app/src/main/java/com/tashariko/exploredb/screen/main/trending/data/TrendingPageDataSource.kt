@@ -1,4 +1,4 @@
-package com.tashariko.exploredb.ui.main.trending.data
+package com.tashariko.exploredb.screen.main.trending.data
 
 import androidx.paging.*
 import com.tashariko.exploredb.database.dao.TrendingItemDao
@@ -12,8 +12,6 @@ import retrofit2.HttpException
 import timber.log.Timber
 import java.io.IOException
 import java.io.InvalidObjectException
-import java.util.concurrent.TimeUnit
-import javax.inject.Inject
 
 /**
  * Data source for Trending pagination via paging library without database

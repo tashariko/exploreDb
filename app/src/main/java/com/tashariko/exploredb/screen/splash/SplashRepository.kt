@@ -1,8 +1,6 @@
-package com.tashariko.exploredb.ui.splash
+package com.tashariko.exploredb.screen.splash
 
-import com.google.gson.JsonObject
 import com.tashariko.exploredb.application.base.BaseDataSource
-import com.tashariko.exploredb.database.dao.UserDao
 import com.tashariko.exploredb.network.ConfigurationResponse
 import com.tashariko.exploredb.network.NetworkBoundRepository
 import com.tashariko.exploredb.network.apiservices.MiscApiService

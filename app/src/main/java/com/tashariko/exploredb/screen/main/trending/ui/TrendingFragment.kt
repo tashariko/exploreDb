@@ -1,4 +1,4 @@
-package com.tashariko.exploredb.ui.main.trending.ui
+package com.tashariko.exploredb.screen.main.trending.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,14 +9,13 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadState
-import androidx.paging.LoadStateAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tashariko.exploredb.application.AppConstants
 import com.tashariko.exploredb.application.base.BaseFragment
 import com.tashariko.exploredb.databinding.FragmentTrendingBinding
 import com.tashariko.exploredb.di.util.injectViewModel
-import com.tashariko.exploredb.ui.main.trending.ui.adapter.LoadingErrorAdapter
-import com.tashariko.exploredb.ui.main.trending.ui.adapter.TrendingAdapter
+import com.tashariko.exploredb.screen.main.trending.ui.adapter.LoadingErrorAdapter
+import com.tashariko.exploredb.screen.main.trending.ui.adapter.TrendingAdapter
 import javax.inject.Inject
 
 class TrendingFragment @Inject constructor(): BaseFragment()  {

@@ -1,4 +1,4 @@
-package com.tashariko.exploredb.ui.splash
+package com.tashariko.exploredb.screen.splash
 
 import android.content.Context
 import androidx.lifecycle.LiveData
@@ -6,17 +6,13 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.gson.Gson
-import com.google.gson.JsonObject
 import com.google.gson.reflect.TypeToken
 import com.tashariko.exploredb.application.AppConstants
-import com.tashariko.exploredb.database.dao.UserDao
-import com.tashariko.exploredb.database.entity.User
 import com.tashariko.exploredb.network.ConfigurationResponse
 import com.tashariko.exploredb.network.result.ApiResult
 import com.tashariko.exploredb.util.SharedPreferenceHelper
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import timber.log.Timber
 import javax.inject.Inject
 
 class SplashViewModel @Inject constructor(): ViewModel() {

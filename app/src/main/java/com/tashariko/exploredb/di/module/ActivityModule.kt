@@ -1,9 +1,9 @@
 package com.tashariko.exploredb.di.module
 
-import com.tashariko.exploredb.ui.main.MainActivity
-import com.tashariko.exploredb.ui.main.movieDetail.MovieDetailActivity
-import com.tashariko.exploredb.ui.splash.LandingActivity
-import com.tashariko.exploredb.ui.splash.SplashActivity
+import com.tashariko.exploredb.screen.main.MainActivity
+import com.tashariko.exploredb.screen.main.movieDetail.MovieDetailActivity
+import com.tashariko.exploredb.screen.splash.LandingActivity
+import com.tashariko.exploredb.screen.splash.SplashActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 

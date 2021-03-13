@@ -1,4 +1,4 @@
-package com.tashariko.exploredb.ui.main.trending.ui
+package com.tashariko.exploredb.screen.main.trending.ui
 
 import android.content.Context
 import androidx.lifecycle.*
@@ -8,8 +8,7 @@ import com.google.gson.reflect.TypeToken
 import com.tashariko.exploredb.application.AppConstants
 import com.tashariko.exploredb.database.entity.TrendingItem
 import com.tashariko.exploredb.network.ConfigurationResponse
-import com.tashariko.exploredb.ui.main.trending.data.TrendingRemoteDataSource
-import com.tashariko.exploredb.ui.main.trending.data.TrendingRepository
+import com.tashariko.exploredb.screen.main.trending.data.TrendingRepository
 import com.tashariko.exploredb.util.SharedPreferenceHelper
 import javax.inject.Inject
 

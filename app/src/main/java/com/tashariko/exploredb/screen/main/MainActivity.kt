@@ -1,14 +1,10 @@
-package com.tashariko.exploredb.ui.main
+package com.tashariko.exploredb.screen.main
 
 import android.os.Bundle
-import androidx.core.view.isVisible
-import androidx.lifecycle.Observer
-import androidx.lifecycle.asLiveData
 import com.tashariko.exploredb.R
 import com.tashariko.exploredb.application.base.BaseActivity
 import com.tashariko.exploredb.databinding.ActivityMainBinding
-import com.tashariko.exploredb.ui.main.trending.ui.TrendingFragment
-import com.tashariko.exploredb.util.NetworkObserver
+import com.tashariko.exploredb.screen.main.trending.ui.TrendingFragment
 import javax.inject.Inject
 
 class MainActivity : BaseActivity() {

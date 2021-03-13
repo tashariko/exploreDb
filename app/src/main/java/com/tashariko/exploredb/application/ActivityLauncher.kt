@@ -4,8 +4,7 @@ import android.content.Context
 import android.content.Intent
 import com.tashariko.exploredb.application.base.BaseActivity
 import com.readystatesoftware.chuck.internal.ui.MainActivity
-import com.tashariko.exploredb.ui.splash.LandingActivity
-import com.tashariko.exploredb.ui.splash.SplashActivity
+import com.tashariko.exploredb.screen.splash.LandingActivity
 
 object ActivityLauncher  {
 

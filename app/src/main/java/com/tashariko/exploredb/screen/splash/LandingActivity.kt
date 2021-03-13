@@ -1,8 +1,7 @@
-package com.tashariko.exploredb.ui.splash
+package com.tashariko.exploredb.screen.splash
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.snackbar.Snackbar
@@ -12,7 +11,7 @@ import com.tashariko.exploredb.databinding.ActivityLandingBinding
 import com.tashariko.exploredb.di.util.injectViewModel
 import com.tashariko.exploredb.network.result.ApiResult
 import com.tashariko.exploredb.network.result.ErrorType
-import com.tashariko.exploredb.ui.main.MainActivity
+import com.tashariko.exploredb.screen.main.MainActivity
 import com.tashariko.exploredb.util.SharedPreferenceHelper
 import javax.inject.Inject
 

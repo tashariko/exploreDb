@@ -1,10 +1,7 @@
-package com.tashariko.exploredb.ui.main.trending.ui.adapter
+package com.tashariko.exploredb.screen.main.trending.ui.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import androidx.core.view.isVisible
 import androidx.paging.LoadState
 import androidx.paging.LoadStateAdapter
 import androidx.recyclerview.widget.RecyclerView

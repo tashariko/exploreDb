@@ -15,7 +15,7 @@
         android:supportsRtl="true"
         android:usesCleartextTraffic="true"
         android:theme="@style/Theme.ExploreDb">
-        <activity android:name=".ui.splash.SplashActivity"
+        <activity android:name=".screen.splash.SplashActivity"
             android:screenOrientation="portrait"
             android:theme="@style/SplashScreenStyle">
             <intent-filter>
@@ -25,13 +25,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.splash.LandingActivity"
+            android:name=".screen.splash.LandingActivity"
             android:screenOrientation="portrait" />
 
-        <activity android:name=".ui.main.MainActivity"
+        <activity android:name=".screen.main.MainActivity"
             android:screenOrientation="portrait"/>
 
-        <activity android:name=".ui.main.movieDetail.MovieDetailActivity"
+        <activity android:name=".screen.main.movieDetail.MovieDetailActivity"
             android:screenOrientation="portrait"/>
 
     </application>

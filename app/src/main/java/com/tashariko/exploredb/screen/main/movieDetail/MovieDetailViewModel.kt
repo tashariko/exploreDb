@@ -1,4 +1,4 @@
-package com.tashariko.exploredb.ui.main.movieDetail
+package com.tashariko.exploredb.screen.main.movieDetail
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -13,7 +13,6 @@ class MovieDetailViewModel  @Inject constructor(): ViewModel() {
 
     @Inject
     public lateinit var repository: ItemDetailRepository
-
 
     /**
      * Find a better way for this

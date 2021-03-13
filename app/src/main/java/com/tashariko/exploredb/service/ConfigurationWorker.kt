@@ -9,7 +9,7 @@ import com.google.gson.reflect.TypeToken
 import com.tashariko.exploredb.application.AppConstants
 import com.tashariko.exploredb.di.util.AndroidWorkerInjection
 import com.tashariko.exploredb.network.result.ApiResult
-import com.tashariko.exploredb.ui.splash.LandingRepository
+import com.tashariko.exploredb.screen.splash.LandingRepository
 import com.tashariko.exploredb.util.SharedPreferenceHelper
 import kotlinx.coroutines.flow.*
 import timber.log.Timber

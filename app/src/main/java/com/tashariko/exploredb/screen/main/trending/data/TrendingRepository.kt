@@ -1,13 +1,12 @@
-package com.tashariko.exploredb.ui.main.trending.data
+package com.tashariko.exploredb.screen.main.trending.data
 
 import androidx.paging.*
 import com.tashariko.exploredb.application.base.BaseDataSource
 import com.tashariko.exploredb.database.dao.TrendingItemDao
 import com.tashariko.exploredb.database.dao.TrendingRemoteKeysDao
 import com.tashariko.exploredb.database.entity.TrendingItem
-import com.tashariko.exploredb.database.entity.TrendingRemtoteKey
 import com.tashariko.exploredb.network.apiservices.MiscApiService
-import com.tashariko.exploredb.ui.main.trending.ui.DEFAULT_PAGE_SIZE
+import com.tashariko.exploredb.screen.main.trending.ui.DEFAULT_PAGE_SIZE
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 

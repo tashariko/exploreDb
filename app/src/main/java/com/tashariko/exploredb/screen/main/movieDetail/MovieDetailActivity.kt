@@ -1,4 +1,4 @@
-package com.tashariko.exploredb.ui.main.movieDetail
+package com.tashariko.exploredb.screen.main.movieDetail
 
 import android.content.Context
 import android.content.Intent
@@ -14,7 +14,6 @@ import com.tashariko.exploredb.databinding.ActivityMovieDetailBinding
 import com.tashariko.exploredb.databinding.FragmentTrendingBinding
 import com.tashariko.exploredb.di.util.injectViewModel
 import com.tashariko.exploredb.network.result.ApiResult
-import com.tashariko.exploredb.ui.main.trending.ui.TrendingViewModel
 import com.tashariko.exploredb.util.UtilityHelper
 import javax.inject.Inject
 
