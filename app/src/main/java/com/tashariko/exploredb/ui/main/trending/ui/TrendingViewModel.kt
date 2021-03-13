@@ -14,7 +14,7 @@ import com.tashariko.exploredb.util.SharedPreferenceHelper
 import javax.inject.Inject
 
 val DEFAULT_PAGE_SIZE = 20
-class TrendingViewModel @Inject constructor(private val dataSource: TrendingRemoteDataSource): ViewModel(){
+class TrendingViewModel @Inject constructor(): ViewModel(){
 
     @Inject
     lateinit var repository: TrendingRepository

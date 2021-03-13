@@ -33,7 +33,7 @@ data class TrendingItem (
         val posterPath: String? = null,
 
         @SerializedName("overview")
-        val overview: String? = null
+        val overview: String? = null,
 //
 //
 //        @SerializedName("title")
@@ -57,8 +57,8 @@ data class TrendingItem (
 //        @SerializedName("popularity")
 //        val popularity: Double,
 //
-//        @SerializedName("media_type")
-//        val mediaType: String
+        @SerializedName("media_type")
+        val mediaType: String
 ): Parcelable
 
 @Entity(tableName = "trending_remote_key")

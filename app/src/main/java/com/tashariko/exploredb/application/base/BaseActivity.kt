@@ -35,6 +35,10 @@ open abstract class BaseActivity: AppCompatActivity(), HasSupportFragmentInjecto
         Snackbar.make(view, getString(R.string.generic_error_message), Snackbar.LENGTH_SHORT).show()
     }
 
+    fun closeWithError(msg:String) {
+        Toast.makeText(this,msg, Toast.LENGTH_SHORT).show()
+    }
+
     abstract fun handleIncomingIntent()
     abstract fun bindAndSetupUI()
     abstract fun vmListeners()

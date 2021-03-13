@@ -30,4 +30,3 @@ data class TrendingItemResponse(
         @SerializedName("page") val page: Long,
         @SerializedName("results") val results: ArrayList<TrendingItem>
 )
-

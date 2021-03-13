@@ -1,17 +1,16 @@
 package com.tashariko.exploredb.ui.main.trending.ui.adapter
 
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.annotation.NonNull
+import android.widget.Toast
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.api.load
+import com.tashariko.exploredb.application.AppConstants
 import com.tashariko.exploredb.database.entity.TrendingItem
-import com.tashariko.exploredb.databinding.ListItemLoadingErrorBinding
 import com.tashariko.exploredb.databinding.ListItemTrendingBinding
-import com.tashariko.exploredb.ui.main.detail.ItemDetailActivity
+import com.tashariko.exploredb.ui.main.movieDetail.MovieDetailActivity
 
 class TrendingAdapter : PagingDataAdapter<TrendingItem, TrendingViewHolder>(
     CustomDiffCallback()
@@ -43,11 +42,20 @@ class TrendingViewHolder(
     val imagePaths: Triple<String, String, String>
 ): RecyclerView.ViewHolder(binding.root) {
 
+    private lateinit var trendingItem: TrendingItem
+
     init {
-        binding.parentView.setOnClickListener { itemView.context.startActivity(Intent(itemView.context, ItemDetailActivity::class.java)) }
+        binding.parentView.setOnClickListener {
+            if(trendingItem.mediaType == AppConstants.MediaType.MOVIE.value) {
+                MovieDetailActivity.launchActivity(itemView.context, trendingItem.id)
+            }else{
+                Toast.makeText(itemView.context,"Coming soon", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     fun bind(trendingItem: TrendingItem) {
+        this.trendingItem = trendingItem
         trendingItem.originalTitle?.let {
             binding.titleView.text = it
         }

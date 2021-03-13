@@ -8,6 +8,7 @@ import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
 import com.tashariko.exploredb.application.AppConstants.DATABASE_NAME
 import com.tashariko.exploredb.database.AppDatabase
+import com.tashariko.exploredb.database.dao.MovieDao
 import com.tashariko.exploredb.database.dao.TrendingItemDao
 import com.tashariko.exploredb.database.dao.TrendingRemoteKeysDao
 import com.tashariko.exploredb.database.dao.UserDao
@@ -47,6 +48,10 @@ class DbModule {
     @Provides
     @Singleton
     fun provideTrendingItemDao(appDatabase: AppDatabase): TrendingItemDao = appDatabase.trendingItemDao()
+
+    @Provides
+    @Singleton
+    fun provideMovieDao(appDatabase: AppDatabase): MovieDao = appDatabase.movieDao()
 
     @Provides
     @Singleton

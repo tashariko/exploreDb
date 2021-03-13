@@ -31,7 +31,7 @@
         <activity android:name=".ui.main.MainActivity"
             android:screenOrientation="portrait"/>
 
-        <activity android:name=".ui.main.detail.ItemDetailActivity"
+        <activity android:name=".ui.main.movieDetail.MovieDetailActivity"
             android:screenOrientation="portrait"/>
 
     </application>

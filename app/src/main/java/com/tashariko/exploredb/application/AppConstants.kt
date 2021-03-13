@@ -16,4 +16,8 @@ object AppConstants {
     const val VIEW_FROM_API = "viewFromApi"
     const val VIEW_FROM_ERROR = "viewFromError"
 
+    enum class MediaType(val value: String) {
+        TV("tv"), MOVIE("movie")
+    }
+
 }
