@@ -2,6 +2,7 @@ package com.tashariko.exploredb.screen.splash
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.snackbar.Snackbar
