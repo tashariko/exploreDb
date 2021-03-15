@@ -34,6 +34,7 @@ import dagger.android.support.DaggerApplication
 )
 interface AppComponent : AndroidInjector<DaggerApplication> {
 
+    //binds items provided by @BindsInstance with dependencies and modules to create a new component for graph
     @Component.Builder
     interface Builder {
         @BindsInstance
