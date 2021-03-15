@@ -19,6 +19,8 @@ GameDb is a sample android app which show the usage of repository pattern. It im
   * [Stetho](http://facebook.github.io/stetho/)
   * [Chuck](https://github.com/jgilfelt/chuck)
 
+
+Used api from : 
 [Movie-db](https://developers.themoviedb.org/3/movies/get-movie-details)
 
 Pagination work:
