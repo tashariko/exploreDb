@@ -51,24 +51,46 @@ dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     kapt "androidx.room:room-compiler:$rootProject.roomVersion"
     implementation "androidx.appcompat:appcompat:$rootProject.appCompatVersion"
-    implementation "androidx.constraintlayout:constraintlayout:$rootProject.constraintLayoutVersion"
     implementation "androidx.core:core-ktx:$rootProject.ktxVersion"
-    implementation "androidx.startup:startup-runtime:$rootProject.startupRuntimeVersion"
+
+    //Constraint layout
+    implementation "androidx.constraintlayout:constraintlayout:$rootProject.constraintLayoutVersion"
+
+    //Swipe to refresh layout
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:$rootProject.swipeRefreshLayoutVersion"
+
+    //Mutlidex
     implementation "androidx.multidex:multidex:$rootProject.multiDex"
+
+    //Fragment
     implementation "androidx.fragment:fragment-ktx:$rootProject.fragmentVersion"
+
+    //Viewmodel + livedata
     implementation "androidx.lifecycle:lifecycle-extensions:$rootProject.lifecycleVersion"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$rootProject.lifecycleVersion"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$rootProject.lifecycleVersion"
+
+    //RecyclerView
     implementation "androidx.recyclerview:recyclerview:$rootProject.recyclerViewVersion"
+
+    //Pagination
     implementation "androidx.paging:paging-runtime:$rootProject.pagingVersion"
+
+    //Room
     implementation "androidx.room:room-runtime:$rootProject.roomVersion"
     implementation "androidx.room:room-ktx:$rootProject.roomVersion"
     kapt "androidx.room:room-compiler:$rootProject.roomVersion"
+
+    //Workmanager
     implementation "androidx.work:work-runtime-ktx:$rootProject.workVersion"
-    implementation "androidx.datastore:datastore-preferences:$rootProject.dataStoreVersion"
+
+    //Material Design
     implementation "com.google.android.material:material:$rootProject.materialVersion"
+
+    //Kotlin standard library
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$rootProject.kotlinVersion"
+
+    //Coroutine
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$rootProject.coroutinesVersion"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$rootProject.coroutinesVersion"
 
@@ -91,12 +113,18 @@ dependencies {
     debugImplementation "com.readystatesoftware.chuck:library:$rootProject.chuck"
     releaseImplementation "com.readystatesoftware.chuck:library-no-op:$rootProject.chuck"
 
-    //Hilt
+    //Dagger
     kapt "com.google.dagger:dagger-compiler:$rootProject.daggerVersion"
     kapt "com.google.dagger:dagger-android-processor:$rootProject.daggerVersion"
     implementation "com.google.dagger:dagger:$rootProject.daggerVersion"
     implementation "com.google.dagger:dagger-android:$rootProject.daggerVersion"
     implementation "com.google.dagger:dagger-android-support:$rootProject.daggerVersion"
+
+    //App Start
+    implementation "androidx.startup:startup-runtime:$rootProject.startupRuntimeVersion"
+
+    //Data Store
+    implementation "androidx.datastore:datastore-preferences:$rootProject.dataStoreVersion"
 
     //to fix the error happening at the starting of the app
     implementation 'org.conscrypt:conscrypt-android:2.4.0'
