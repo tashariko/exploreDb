@@ -1,6 +1,6 @@
-# Gamedb
+# ExploreDB
 
-GameDb is a sample android app which show the usage of repository pattern. It implements Clean Architecture with latest android trends.
+ExploreDB is a sample android app which show the usage of repository pattern. It implements Clean Architecture with latest android trends.
 
 ## Libraries Used
   * [Android-KTX](https://developer.android.com/kotlin/ktx)
@@ -22,8 +22,8 @@ GameDb is a sample android app which show the usage of repository pattern. It im
   * [Chuck](https://github.com/jgilfelt/chuck)
 
 
-Used api from : 
-[Movie-db](https://developers.themoviedb.org/3/movies/get-movie-details)
+Used api : 
+[Movie-db](https://developers.themoviedb.org/3/)
 
 Pagination work:
 [Android-Paging 3.0](https://medium.com/@paulhundal/paging-library-with-android-mvvm-6a3a4d94de72)
@@ -32,4 +32,4 @@ Pagination work:
 ## Things to be done:
  * Use scoped storage: https://medium.com/better-programming/android-scoped-storage-demystified-3024a062ba24
  * Implement lifecyceowner with handling all lifecycle events
- * motionlayout
+ * Motionlayout
