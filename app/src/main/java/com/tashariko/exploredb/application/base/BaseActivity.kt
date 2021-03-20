@@ -4,9 +4,12 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
 import com.tashariko.exploredb.R
+import com.tashariko.exploredb.application.AppConstants
+import com.tashariko.exploredb.util.SharedPreferenceHelper
 import dagger.android.AndroidInjection
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
@@ -21,8 +24,14 @@ open abstract class BaseActivity: AppCompatActivity(), HasSupportFragmentInjecto
 
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this);
+
+        AppCompatDelegate.setDefaultNightMode(if (getCurrentMode()) AppCompatDelegate.MODE_NIGHT_NO else AppCompatDelegate.MODE_NIGHT_YES)
         super.onCreate(savedInstanceState)
 
+    }
+
+    private  fun getCurrentMode(): Boolean {
+        return SharedPreferenceHelper.getBooleanFromSharedPreference(this, AppConstants.SP_IS_LIGHT_THEME_KEY, true)
     }
 
     override fun supportFragmentInjector(): AndroidInjector<Fragment> = fragmentDispatchingAndroidInjector

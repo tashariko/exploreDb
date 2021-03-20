@@ -13,9 +13,9 @@ import kotlinx.coroutines.flow.flow
 
 object NetworkObserver: ConnectivityManager.NetworkCallback() {
 
-    private val netLiveData: MutableStateFlow<Boolean> = MutableStateFlow(true)
+    private val netLiveData: MutableLiveData<Boolean> = MutableLiveData()
 
-    fun getNetLiveData(context: Context): MutableStateFlow<Boolean> {
+    fun getNetLiveData(context: Context): LiveData<Boolean> {
         val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
@@ -37,17 +37,17 @@ object NetworkObserver: ConnectivityManager.NetworkCallback() {
             }
         }
 
-        netLiveData.value = isNetAvailable
+        netLiveData.postValue(isNetAvailable)
 
         return netLiveData
     }
 
     override fun onAvailable(network: Network?) {
-        netLiveData.value = true
+        netLiveData.postValue(true)
     }
 
     override fun onLost(network: Network?) {
-        netLiveData.value = false
+        netLiveData.postValue(false)
     }
 }
 //

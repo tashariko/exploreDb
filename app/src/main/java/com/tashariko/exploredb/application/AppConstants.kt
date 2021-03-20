@@ -5,6 +5,7 @@ object AppConstants {
     const val SP_FILE_KEY = "exploreDbPreferences"
     const val SP_KEY_CONFIG = "spKeyConfig"
     const val SP_KEY_IS_FIRST_TIME = "spIsFirstTime"
+    const val SP_IS_LIGHT_THEME_KEY = "isLightThemeKey"
 
     //Error Loading View
     const val NO_DATA_LAYOUT = "No-Data-Layout"

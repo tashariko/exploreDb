@@ -1,5 +1,6 @@
 package com.tashariko.exploredb.screen.splash
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.core.view.isVisible
@@ -17,6 +18,15 @@ import com.tashariko.exploredb.util.SharedPreferenceHelper
 import javax.inject.Inject
 
 class LandingActivity: BaseActivity() {
+
+    companion object {
+
+        fun launchLandingScreen(context: Context) {
+            val mainIntent = Intent(context, LandingActivity::class.java)
+            context.startActivity(mainIntent)
+            (context as BaseActivity).finish()
+        }
+    }
 
     lateinit var binding: ActivityLandingBinding
 
@@ -50,8 +60,7 @@ class LandingActivity: BaseActivity() {
                     binding.progressBar.isVisible = true
                 }
                 ApiResult.Status.SUCCESS -> {
-                    SharedPreferenceHelper.putInSharedPreference(this, AppConstants.SP_KEY_IS_FIRST_TIME, true)
-                    startActivity(Intent(this, MainActivity::class.java))
+                    MainActivity.launchScreen(this)
                 }
                 ApiResult.Status.ERROR -> {
                     it.errorType?.let { et ->

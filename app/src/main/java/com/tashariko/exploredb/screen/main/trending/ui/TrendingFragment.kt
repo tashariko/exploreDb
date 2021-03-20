@@ -1,30 +1,38 @@
 package com.tashariko.exploredb.screen.main.trending.ui
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.tashariko.exploredb.R
 import com.tashariko.exploredb.application.AppConstants
 import com.tashariko.exploredb.application.base.BaseFragment
 import com.tashariko.exploredb.databinding.FragmentTrendingBinding
 import com.tashariko.exploredb.di.util.injectViewModel
+import com.tashariko.exploredb.screen.main.SetMainTitle
 import com.tashariko.exploredb.screen.main.trending.ui.adapter.LoadingErrorAdapter
 import com.tashariko.exploredb.screen.main.trending.ui.adapter.TrendingAdapter
+import com.tashariko.exploredb.util.NetworkObserver
+import kotlinx.android.synthetic.main.fragment_trending.*
+import kotlinx.coroutines.flow.collect
 import javax.inject.Inject
 
 class TrendingFragment @Inject constructor(): BaseFragment()  {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
-
-    private lateinit var binding: FragmentTrendingBinding
     lateinit var viewModel: TrendingViewModel
+
+    lateinit var binding: FragmentTrendingBinding
+    lateinit var delegate: SetMainTitle
 
     private val adapter: TrendingAdapter by lazy {
         TrendingAdapter()
@@ -43,6 +51,14 @@ class TrendingFragment @Inject constructor(): BaseFragment()  {
         return rootview
     }
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        try {
+            delegate = context as SetMainTitle
+        } catch (e: ClassCastException) {
+            throw ClassCastException(activity.toString() + " must implement SetMainTitle")
+        }
+    }
 
     override fun handleIncomingIntent() {
 
@@ -67,15 +83,24 @@ class TrendingFragment @Inject constructor(): BaseFragment()  {
             }
         })
 
+        NetworkObserver.getNetLiveData(requireActivity()).observe(viewLifecycleOwner, Observer {
+          it?.let {
+              binding.offlineContainerView.isVisible = it
+          }  ?:run {
+             binding.offlineContainerView.isVisible = false
+          }
+        })
     }
 
     override fun viewlisteners() {
+        delegate.setTitle(getString(R.string.fragment_trending_title))
 
         adapter.addLoadStateListener { loadState ->
             if (loadState.refresh is LoadState.Loading){
                 configureView(AppConstants.LOADING_LAYOUT, AppConstants.VIEW_FROM_LOADING)
             }
             else{
+                binding.swipeRefreshLayout.isRefreshing = false
                 configureView(AppConstants.DATA_LAYOUT, AppConstants.VIEW_FROM_API)
 
                 // getting the error
@@ -88,10 +113,7 @@ class TrendingFragment @Inject constructor(): BaseFragment()  {
                 error?.let {
                     Toast.makeText(requireActivity(), it.error.message, Toast.LENGTH_LONG).show()
                 }
-
             }
-
-
         }
 
         binding.swipeRefreshLayout.setOnRefreshListener { adapter.retry() }

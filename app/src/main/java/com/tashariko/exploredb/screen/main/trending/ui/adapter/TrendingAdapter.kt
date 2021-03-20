@@ -7,6 +7,7 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.api.load
+import com.tashariko.exploredb.R
 import com.tashariko.exploredb.application.AppConstants
 import com.tashariko.exploredb.database.entity.TrendingItem
 import com.tashariko.exploredb.databinding.ListItemTrendingBinding
@@ -68,7 +69,9 @@ class TrendingViewHolder(
         // size : w500/
         // path: 8uO0gUM8aNqYLs1OsTBQiXu0fEv.jpg
         trendingItem.posterPath?.let {
-            binding.imageView.load("${imagePaths.first}${imagePaths.third}${it}")
+            binding.imageView.load("${imagePaths.first}${imagePaths.third}${it}") {
+                placeholder(R.drawable.icon_movie)
+            }
         }
 
     }
