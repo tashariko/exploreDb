@@ -11,10 +11,10 @@ GameDb is a sample android app which show the usage of repository pattern. It im
   * [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel)
   * [Livedata](https://developer.android.com/topic/libraries/architecture/livedata)
   * [Pagination](https://developer.android.com/topic/libraries/architecture/paging/v3-overview)
-  * [WorkManager](https://developer.android.com/topic/libraries/architecture/workmanager)
   * [Room](https://developer.android.com/topic/libraries/architecture/room)
-  * [App startup](https://developer.android.com/topic/libraries/app-startup)
-  * [Data store](https://developer.android.com/topic/libraries/architecture/datastore)
+  * [WorkManager](https://developer.android.com/topic/libraries/architecture/workmanager) - Yet to implement
+  * [App startup](https://developer.android.com/topic/libraries/app-startup)  - Yet to implement
+  * [Data store](https://developer.android.com/topic/libraries/architecture/datastore) - Yet to implement
   * [Retrofit2](https://square.github.io/retrofit/)
   * [Coil](https://coil-kt.github.io/coil/)
   * [Timber](https://github.com/JakeWharton/timber)
