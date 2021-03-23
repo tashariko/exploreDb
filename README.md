@@ -33,3 +33,6 @@ Pagination work:
  * Use scoped storage: https://medium.com/better-programming/android-scoped-storage-demystified-3024a062ba24
  * Implement lifecyceowner with handling all lifecycle events
  * Motionlayout
+
+## Knows bugs:
+ * Crash on first time of page load.
