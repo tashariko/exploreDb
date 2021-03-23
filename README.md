@@ -29,7 +29,8 @@ Pagination work:
 [Android-Paging 3.0](https://medium.com/@paulhundal/paging-library-with-android-mvvm-6a3a4d94de72)
 
 
-## Things to be done:
+## Things to be done
+ * Jetpack Compose
  * Use scoped storage: https://medium.com/better-programming/android-scoped-storage-demystified-3024a062ba24
  * Implement lifecyceowner with handling all lifecycle events
  * Motionlayout
