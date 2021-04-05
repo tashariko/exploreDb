@@ -5,8 +5,7 @@ ExploreDB is a sample android app which show the usage of repository pattern. It
 ## Libraries Used
   * [Android-KTX](https://developer.android.com/kotlin/ktx)
   * [Kotlin](https://kotlinlang.org/docs/reference/android-overview.html)
-  * [Coroutines](https://kotlinlang.org/docs/reference/coroutines-overview.html)
-  * [Flow](https://kotlinlang.org/docs/reference/coroutines/flow.html)
+  * [Coroutines](https://kotlinlang.org/docs/reference/coroutines-overview.html)/[Flow](https://kotlinlang.org/docs/reference/coroutines/flow.html)
   * [Dagger](https://dagger.dev/)
   * [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel)
   * [Livedata](https://developer.android.com/topic/libraries/architecture/livedata)
