@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import coil.api.load
 import com.tashariko.exploredb.R
 import com.tashariko.exploredb.application.AppConstants
 import com.tashariko.exploredb.application.base.BaseActivity
@@ -95,7 +96,27 @@ class MovieDetailActivity: BaseActivity() {
     }
 
     private fun updateUI(data: Movie) {
-        binding.textView.text = data.title
+        with(binding){
+            with(data){
+                originalTitle.let {
+                    titleView.text = it
+                }
+
+                overview.let {
+                    overviewView.text = it
+                }
+
+                //base url: https://image.tmdb.org/t/p/
+                // size : w500/
+                // path: 8uO0gUM8aNqYLs1OsTBQiXu0fEv.jpg
+                posterPath.let {
+                    imageView.load("${viewModel.getImagePath(this@MovieDetailActivity).first}${viewModel.getImagePath(this@MovieDetailActivity).third}${it}") {
+                        placeholder(R.drawable.icon_movie)
+                    }
+                }
+            }
+        }
+
     }
 
     override fun viewlisteners() {
