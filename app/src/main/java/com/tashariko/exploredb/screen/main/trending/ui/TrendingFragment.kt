@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.tashariko.exploredb.R
 import com.tashariko.exploredb.application.AppConstants
 import com.tashariko.exploredb.application.base.BaseFragment
@@ -73,6 +74,7 @@ class TrendingFragment @Inject constructor(): BaseFragment()  {
         binding.recyclerView.adapter = adapter.withLoadStateFooter(LoadingErrorAdapter{
             adapter.retry()
         })
+        adapter.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
     }
 
     @ExperimentalPagingApi
