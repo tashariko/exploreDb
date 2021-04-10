@@ -31,8 +31,6 @@ Pagination work:
 ## Things to be done
  * Jetpack Compose
  * Use scoped storage: https://medium.com/better-programming/android-scoped-storage-demystified-3024a062ba24
- * Implement lifecyceowner with handling all lifecycle events
+ * Implement lifecycleowner with handling all lifecycle events
  * Motionlayout
 
-## Knows bugs:
- * Crash on first time of page load.
