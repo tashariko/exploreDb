@@ -74,7 +74,7 @@ class TrendingFragment @Inject constructor(): BaseFragment()  {
         binding.recyclerView.adapter = adapter.withLoadStateFooter(LoadingErrorAdapter{
             adapter.retry()
         })
-        adapter.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
+        //adapter.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
     }
 
     @ExperimentalPagingApi

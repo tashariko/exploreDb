@@ -74,7 +74,7 @@ dependencies {
     implementation "androidx.recyclerview:recyclerview:$rootProject.recyclerViewVersion"
 
     //Pagination
-    implementation "androidx.paging:paging-runtime:$rootProject.pagingVersion"
+    implementation "androidx.paging:paging-runtime-ktx:$rootProject.pagingVersion"
 
     //Room
     implementation "androidx.room:room-runtime:$rootProject.roomVersion"

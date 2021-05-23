@@ -19,7 +19,7 @@ class TrendingViewModel @Inject constructor(): BaseViewModel(){
     @Inject
     lateinit var repository: TrendingRepository
 
-    var dbSupport  = true
+    var dbSupport  = false
 
     @ExperimentalPagingApi
     fun fetchTrendingList(): LiveData<PagingData<TrendingItem>> {

@@ -145,12 +145,7 @@ class TrendingMediator constructor(val trendingRemoteDataSource: TrendingRemoteD
             LoadType.APPEND -> {
                 val remoteKeys = getLastRemoteKey(state)
                 //crashing here
-                // ?: throw InvalidObjectException("Remote key should not be null for $loadType")
-                if (remoteKeys?.nextKey == null) {
-                    return MediatorResult.Success(
-                            endOfPaginationReached = true
-                    )
-                }
+                ?: throw InvalidObjectException("Remote key should not be null for $loadType")
                 val key = remoteKeys.nextKey
                 Timber.i("Append: $key")
                 key
@@ -158,8 +153,7 @@ class TrendingMediator constructor(val trendingRemoteDataSource: TrendingRemoteD
             LoadType.PREPEND -> {
                 val remoteKeys = getFirstRemoteKey(state)
                 //crashing here
-                //?: throw InvalidObjectException("Invalid state, key should not be null")
-                remoteKeys?.prevKey ?: return MediatorResult.Success(endOfPaginationReached = true)
+                ?: throw InvalidObjectException("Invalid state, key should not be null")
                 val key = remoteKeys.prevKey
                 Timber.i("Prepend: $key")
                 key
