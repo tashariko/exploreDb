@@ -28,14 +28,11 @@ Pagination work:
 [Android-Paging 3.0](https://medium.com/@paulhundal/paging-library-with-android-mvvm-6a3a4d94de72)
 
 
-## Plan for next iteration but to eventually forget
- * Add Search api
- * Add Test cases
- 
- 
-## In a galaxy far far away
+## Things to be done
  * Jetpack Compose
  * Use scoped storage: https://medium.com/better-programming/android-scoped-storage-demystified-3024a062ba24
- * Implement lifecycleowner with handling all lifecycle events
- * Motionlayout with some magical animations
+ * Implement lifecyceowner with handling all lifecycle events
+ * Motionlayout
 
+## Knows bugs:
+ * Crash on first time of page load.
