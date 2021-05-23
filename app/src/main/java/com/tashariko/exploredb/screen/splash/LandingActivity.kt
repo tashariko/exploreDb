@@ -7,6 +7,7 @@ import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.snackbar.Snackbar
+import com.tashariko.exploredb.R
 import com.tashariko.exploredb.application.AppConstants
 import com.tashariko.exploredb.application.base.BaseActivity
 import com.tashariko.exploredb.databinding.ActivityLandingBinding
@@ -40,6 +41,7 @@ class LandingActivity: BaseActivity() {
         binding = ActivityLandingBinding.inflate(layoutInflater)
         setContentView(binding.root)
         viewModel = injectViewModel(viewModelFactory)
+        bindAndSetupUI()
         vmListeners()
     }
 
@@ -48,7 +50,9 @@ class LandingActivity: BaseActivity() {
     }
 
     override fun bindAndSetupUI() {
-
+        binding.retryButton.setOnClickListener {
+            viewModel.getConfig(this)
+        }
     }
 
     override fun vmListeners() {
@@ -65,16 +69,16 @@ class LandingActivity: BaseActivity() {
                 ApiResult.Status.ERROR -> {
                     it.errorType?.let { et ->
                         if(et.type == ErrorType.Type.Generic) {
-                            showSnackbar(binding.root)
+                            showToast(getString(R.string.generic_error_message))
                         }else{
                             et.message?.let {msg ->
                                 Snackbar.make(binding.root, msg, Snackbar.LENGTH_SHORT).show()
                             }?:run{
-                                showSnackbar(binding.root)
+                                showToast(getString(R.string.generic_error_message))
                             }
                         }
                     }?:run{
-                        showSnackbar(binding.root)
+                        showToast(getString(R.string.generic_error_message))
                     }
                     binding.retryButton.isVisible = true
                 }
