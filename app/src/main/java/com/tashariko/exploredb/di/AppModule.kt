@@ -1,4 +1,4 @@
-package com.tashariko.exploredb.di.module
+package com.tashariko.exploredb.di
 
 import android.app.Application
 import android.os.Build
@@ -7,10 +7,11 @@ import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.readystatesoftware.chuck.ChuckInterceptor
 import com.tashariko.exploredb.BuildConfig
-import com.tashariko.exploredb.di.CoroutineScropeIO
 import com.tashariko.exploredb.network.RequestInterceptor
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import okhttp3.OkHttpClient
@@ -22,6 +23,7 @@ import javax.inject.Singleton
 
 
 @Module
+@InstallIn(SingletonComponent::class)
 class AppModule {
 
     @Provides
@@ -34,11 +36,6 @@ class AppModule {
     @Provides
     @Singleton
     fun providesRequestInterceptor(application: Application): RequestInterceptor = RequestInterceptor(application.applicationContext, BuildConfig.API_DEVELOPER_TOKEN)
-
-
-    @CoroutineScropeIO
-    @Provides
-    fun provideCoroutineScopeIO() = CoroutineScope(Dispatchers.IO)
 
     @Provides
     @Singleton

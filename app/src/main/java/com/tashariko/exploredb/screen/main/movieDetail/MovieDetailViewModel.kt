@@ -12,10 +12,12 @@ import com.tashariko.exploredb.network.ConfigurationResponse
 import com.tashariko.exploredb.network.result.ApiResult
 import com.tashariko.exploredb.util.SharedPreferenceHelper
 import com.tashariko.exploredb.util.SingleLiveEvent
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.collect
 import javax.inject.Inject
 
+@HiltViewModel
 class MovieDetailViewModel  @Inject constructor(): BaseViewModel() {
 
     @Inject

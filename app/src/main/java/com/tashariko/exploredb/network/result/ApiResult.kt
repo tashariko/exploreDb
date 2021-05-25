@@ -7,7 +7,7 @@ package com.tashariko.exploredb.network.result
  * `LiveData<Result<T>>` to pass back the latest data to the UI with its fetch status.
  */
 
-data class ApiResult<out T>(val status: Status, val data: T?, val errorType: ErrorType?) {
+data class ApiResult<out T>(val status: Status, val data: T? = null, val errorType: ErrorType? = null) {
 
     enum class Status {
         SUCCESS,

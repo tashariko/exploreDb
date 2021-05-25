@@ -3,6 +3,7 @@ package com.tashariko.exploredb.screen.main.movieDetail
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import coil.api.load
@@ -13,19 +14,18 @@ import com.tashariko.exploredb.database.entity.Movie
 import com.tashariko.exploredb.databinding.ActivityItemDetailBinding
 import com.tashariko.exploredb.databinding.ActivityMovieDetailBinding
 import com.tashariko.exploredb.databinding.FragmentTrendingBinding
-import com.tashariko.exploredb.di.util.injectViewModel
 import com.tashariko.exploredb.network.result.ApiResult
+import com.tashariko.exploredb.screen.splash.SplashViewModel
 import com.tashariko.exploredb.util.UtilityHelper
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class MovieDetailActivity: BaseActivity() {
 
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
-
-    lateinit var viewModel: MovieDetailViewModel
-
+    private val viewModel by viewModels<MovieDetailViewModel>()
     lateinit var binding: ActivityMovieDetailBinding
+
     var entityId = 0L
     companion object{
 
@@ -42,7 +42,6 @@ class MovieDetailActivity: BaseActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMovieDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        viewModel = injectViewModel(viewModelFactory)
         handleIncomingIntent()
         bindAndSetupUI()
         vmListeners()
@@ -61,11 +60,11 @@ class MovieDetailActivity: BaseActivity() {
         }
     }
 
-    override fun bindAndSetupUI() {
+    fun bindAndSetupUI() {
         binding.errorLoadingContainerView.addDataView(binding.topView, javaClass.simpleName)
     }
 
-    override fun vmListeners() {
+    fun vmListeners() {
         viewModel.movieDetailLiveData.observe(this, Observer { item ->
             when (item.status) {
                 ApiResult.Status.LOADING -> if (item.data == null ) {
@@ -119,7 +118,7 @@ class MovieDetailActivity: BaseActivity() {
 
     }
 
-    override fun viewlisteners() {
+    fun viewlisteners() {
 
     }
 

@@ -26,15 +26,15 @@ class SplashActivity : BaseActivity() {
 
     }
 
-    override fun bindAndSetupUI() {
+    fun bindAndSetupUI() {
 
     }
 
-    override fun vmListeners() {
+    fun vmListeners() {
 
     }
 
-    override fun viewlisteners() {
+    fun viewlisteners() {
 
     }
 }

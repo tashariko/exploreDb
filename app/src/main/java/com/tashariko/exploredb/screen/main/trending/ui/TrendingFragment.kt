@@ -6,7 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.core.view.isVisible
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.paging.ExperimentalPagingApi
@@ -17,20 +19,21 @@ import com.tashariko.exploredb.R
 import com.tashariko.exploredb.application.AppConstants
 import com.tashariko.exploredb.application.base.BaseFragment
 import com.tashariko.exploredb.databinding.FragmentTrendingBinding
-import com.tashariko.exploredb.di.util.injectViewModel
 import com.tashariko.exploredb.screen.main.SetMainTitle
+import com.tashariko.exploredb.screen.main.movieDetail.MovieDetailViewModel
 import com.tashariko.exploredb.screen.main.trending.ui.adapter.LoadingErrorAdapter
 import com.tashariko.exploredb.screen.main.trending.ui.adapter.TrendingAdapter
 import com.tashariko.exploredb.util.NetworkObserver
+import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.android.synthetic.main.fragment_trending.*
 import kotlinx.coroutines.flow.collect
 import javax.inject.Inject
 
-class TrendingFragment @Inject constructor(): BaseFragment()  {
+@AndroidEntryPoint
+class TrendingFragment : BaseFragment()  {
 
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
-    lateinit var viewModel: TrendingViewModel
+    private val viewModel by viewModels<TrendingViewModel>()
 
     lateinit var binding: FragmentTrendingBinding
     lateinit var delegate: SetMainTitle
@@ -43,7 +46,7 @@ class TrendingFragment @Inject constructor(): BaseFragment()  {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentTrendingBinding.inflate(inflater, container, false)
         rootview = binding.root
-        viewModel = injectViewModel(viewModelFactory)
+
         handleIncomingIntent()
         bindAndSetupUI()
         vmListeners()

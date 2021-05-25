@@ -3,6 +3,7 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-kapt'
     id 'kotlin-android-extensions'
+    id 'dagger.hilt.android.plugin'
 }
 
 android {
@@ -37,7 +38,9 @@ android {
 
     buildFeatures {
         viewBinding = true
+        compose = true
     }
+
 }
 
 tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
@@ -114,11 +117,10 @@ dependencies {
     releaseImplementation "com.readystatesoftware.chuck:library-no-op:$rootProject.chuck"
 
     //Dagger
-    kapt "com.google.dagger:dagger-compiler:$rootProject.daggerVersion"
-    kapt "com.google.dagger:dagger-android-processor:$rootProject.daggerVersion"
-    implementation "com.google.dagger:dagger:$rootProject.daggerVersion"
-    implementation "com.google.dagger:dagger-android:$rootProject.daggerVersion"
-    implementation "com.google.dagger:dagger-android-support:$rootProject.daggerVersion"
+    implementation "com.google.dagger:hilt-android:$rootProject.hiltCoreVersion"
+    kapt "com.google.dagger:hilt-compiler:$rootProject.hiltCoreVersion"
+    kapt "androidx.hilt:hilt-compiler:$rootProject.hiltVersion"
+    kaptAndroidTest "com.google.dagger:hilt-compiler:$rootProject.hiltCoreVersion"
 
     //App Start
     implementation "androidx.startup:startup-runtime:$rootProject.startupRuntimeVersion"
@@ -128,5 +130,30 @@ dependencies {
 
     //to fix the error happening at the starting of the app
     implementation 'org.conscrypt:conscrypt-android:2.4.0'
+
+
+    /**
+     * https://developer.android.com/jetpack/compose/setup
+     */
+    implementation "androidx.compose.ui:ui:$rootProject.composeVersion"
+    // Tooling support (Previews, etc.)
+    implementation "androidx.compose.ui:ui-tooling:$rootProject.composeVersion"
+    // Foundation (Border, Background, Box, Image, Scroll, shapes, animations, etc.)
+    implementation "androidx.compose.foundation:foundation:$rootProject.composeVersion"
+    // Material Design
+    implementation "androidx.compose.material:material:$rootProject.composeVersion"
+    // Material design icons
+    implementation "androidx.compose.material:material-icons-core:$rootProject.composeVersion"
+    implementation "androidx.compose.material:material-icons-extended:$rootProject.composeVersion"
+    
+    // Integration with ViewModels
+    implementation "androidx.lifecycle:lifecycle-viewmodel-compose:$rootProject.viewModelComposeVersion"
+    // Integration with observables
+    implementation "androidx.compose.runtime:runtime-livedata:$rootProject.composeVersion"
+
+    // Integration with activities
+    implementation "androidx.activity:activity-compose:$rootProject.activityComposeVersion"
+
+    implementation "androidx.constraintlayout:constraintlayout-compose:1.0.0-alpha07"
 
 }

@@ -10,8 +10,6 @@ import com.tashariko.exploredb.util.SharedPreferenceHelper
 
 open class BaseViewModel: ViewModel() {
 
-
-
     fun getImagePath(mContext: Context): Triple<String, String, String> {
         val string = SharedPreferenceHelper.getStringFromSharedPreference(
                 mContext,

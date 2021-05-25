@@ -1,4 +1,4 @@
-package com.tashariko.exploredb.di.module
+package com.tashariko.exploredb.di
 
 import android.app.Application
 import androidx.room.Room
@@ -15,10 +15,13 @@ import com.tashariko.exploredb.database.dao.UserDao
 import com.tashariko.exploredb.service.DatabaseInitialiseWorker
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
 
 @Module
+@InstallIn(SingletonComponent::class)
 class DbModule {
 
     @Provides
@@ -34,8 +37,8 @@ class DbModule {
             .addCallback(object : RoomDatabase.Callback() {
                 override fun onCreate(db: SupportSQLiteDatabase) {
                     super.onCreate(db)
-                    val request = OneTimeWorkRequestBuilder<DatabaseInitialiseWorker>().build()
-                    WorkManager.getInstance(application.applicationContext).enqueue(request)
+                   // val request = OneTimeWorkRequestBuilder<DatabaseInitialiseWorker>().build()
+                   //  WorkManager.getInstance(application.applicationContext).enqueue(request)
                 }
             })
             .build()

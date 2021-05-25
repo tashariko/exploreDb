@@ -11,9 +11,11 @@ import com.tashariko.exploredb.database.entity.TrendingItem
 import com.tashariko.exploredb.network.ConfigurationResponse
 import com.tashariko.exploredb.screen.main.trending.data.TrendingRepository
 import com.tashariko.exploredb.util.SharedPreferenceHelper
+import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 val DEFAULT_PAGE_SIZE = 20
+@HiltViewModel
 class TrendingViewModel @Inject constructor(): BaseViewModel(){
 
     @Inject

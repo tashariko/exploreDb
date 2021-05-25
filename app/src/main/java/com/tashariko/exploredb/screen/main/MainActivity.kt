@@ -40,14 +40,14 @@ class MainActivity : BaseActivity(), SetMainTitle {
 
     }
 
-    override fun bindAndSetupUI() {
+    fun bindAndSetupUI() {
         supportFragmentManager
                 .beginTransaction()
                 .replace(R.id.fragmentContainer, trendingFragment, "CustomFragment.TAG")
                 .commitAllowingStateLoss()
     }
 
-    override fun vmListeners() {
+    fun vmListeners() {
         binding.changeThemeView.setOnClickListener {
             SharedPreferenceHelper.putInSharedPreference(this, AppConstants.SP_IS_LIGHT_THEME_KEY,  !SharedPreferenceHelper.getBooleanFromSharedPreference(this, AppConstants.SP_IS_LIGHT_THEME_KEY, true))
             val intent = intent
@@ -57,7 +57,7 @@ class MainActivity : BaseActivity(), SetMainTitle {
         }
     }
 
-    override fun viewlisteners() {
+    fun viewlisteners() {
 
     }
 
