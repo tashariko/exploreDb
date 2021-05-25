@@ -1,11 +1,10 @@
 package com.tashariko.exploredb.network
 
-import com.tashariko.exploredb.network.result.ErrorType
 import com.tashariko.exploredb.network.result.ApiResult
+import com.tashariko.exploredb.network.result.ErrorType
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.*
-import java.lang.Exception
 
 /**
  * A repository which provides resource from local database as well as remote end point.
@@ -16,19 +15,20 @@ import java.lang.Exception
 @ExperimentalCoroutinesApi
 abstract class NetworkBoundRepository<RESULT, REQUEST> {
 
-    fun flowData(databaseQuery: () -> Flow<RESULT>?,
-                 networkCall: suspend () -> ApiResult<REQUEST>,
-                 saveCallResult: suspend (REQUEST) -> Unit,
-                 parseNetworkResponse: (REQUEST) -> ApiResult<RESULT>
+    fun flowData(
+        databaseQuery: () -> Flow<RESULT>?,
+        networkCall: suspend () -> ApiResult<REQUEST>,
+        saveCallResult: suspend (REQUEST) -> Unit,
+        parseNetworkResponse: (REQUEST) -> ApiResult<RESULT>
     ): Flow<ApiResult<RESULT>> = flow<ApiResult<RESULT>> {
 
         emit(ApiResult.loading())
 
-        if(shouldfetchDataFromDbBeforeNetwork()) {
-            databaseQuery.invoke()?.let {flow ->
+        if (shouldfetchDataFromDbBeforeNetwork()) {
+            databaseQuery.invoke()?.let { flow ->
                 val source = flow.map { ApiResult.success(it) }
                 emit(ApiResult.loading(source.first().data))
-            }?: run {
+            } ?: run {
                 emit(ApiResult.error<RESULT>(ErrorType(ErrorType.Type.Generic), null))
                 throw Exception("Provide datebaseQuery as shouldfetchDataFromDbBeforeNetwork is true")
             }
@@ -38,26 +38,26 @@ abstract class NetworkBoundRepository<RESULT, REQUEST> {
         val responseStatus = networkCall.invoke()
         if (responseStatus.status == ApiResult.Status.SUCCESS) {
             responseStatus.data?.let { req ->
-                if(shouldStoreDataInDbAfterNetwork()) {
+                if (shouldStoreDataInDbAfterNetwork()) {
                     saveCallResult(req)
                 }
                 emit(parseNetworkResponse(req))
-            }?: run {
-                emit(ApiResult.error<RESULT>(responseStatus.errorType,null))
+            } ?: run {
+                emit(ApiResult.error<RESULT>(responseStatus.errorType, null))
                 throw Exception("Response is null")
             }
 
         } else if (responseStatus.status == ApiResult.Status.ERROR) {
-            if(shouldfetchDataFromDbBeforeNetwork()) {
+            if (shouldfetchDataFromDbBeforeNetwork()) {
                 databaseQuery.invoke()?.let { flow ->
                     val source = flow.map { ApiResult.success(it) }
-                    emit(ApiResult.error<RESULT>(responseStatus.errorType,source.first().data))
-                }?: run {
+                    emit(ApiResult.error<RESULT>(responseStatus.errorType, source.first().data))
+                } ?: run {
                     emit(ApiResult.error<RESULT>(ErrorType(ErrorType.Type.Generic), null))
                     throw Exception("Provide datebaseQuery as shouldfetchDataFromDbBeforeNetwork is true")
                 }
-            }else{
-                emit(ApiResult.error<RESULT>(responseStatus.errorType,null))
+            } else {
+                emit(ApiResult.error<RESULT>(responseStatus.errorType, null))
             }
         }
 

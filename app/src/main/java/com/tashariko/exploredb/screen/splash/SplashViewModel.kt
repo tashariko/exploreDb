@@ -17,7 +17,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class SplashViewModel @Inject constructor(): ViewModel() {
+class SplashViewModel @Inject constructor() : ViewModel() {
 
     @Inject
     lateinit var repository: LandingRepository
@@ -26,19 +26,23 @@ class SplashViewModel @Inject constructor(): ViewModel() {
     val createTaskLiveData: LiveData<ApiResult<ConfigurationResponse>>
         get() = _tempConfigLiveData
 
-    fun getConfig(context:Context){
+    fun getConfig(context: Context) {
         viewModelScope.launch {
             try {
                 repository.getData().collect {
                     if (it.status == ApiResult.Status.SUCCESS) {
                         val gson = Gson()
                         val type = object : TypeToken<ConfigurationResponse>() {}.type
-                        val configString =  gson.toJson(it.data!!, type)
-                        SharedPreferenceHelper.putInSharedPreference(context, AppConstants.SP_KEY_CONFIG, configString)
+                        val configString = gson.toJson(it.data!!, type)
+                        SharedPreferenceHelper.putInSharedPreference(
+                            context,
+                            AppConstants.SP_KEY_CONFIG,
+                            configString
+                        )
                     }
                     _tempConfigLiveData.postValue(it)
                 }
-            }catch (ex: Exception){
+            } catch (ex: Exception) {
                 ex.printStackTrace()
             }
         }

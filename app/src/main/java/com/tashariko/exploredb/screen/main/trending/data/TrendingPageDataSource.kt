@@ -23,7 +23,8 @@ val DEFAULT_PAGE_INDEX = 1
 /**
  * Handling without pagination
  */
-class TrendingPageDataSource constructor(val trendingRemoteDataSource: TrendingRemoteDataSource): PagingSource<Int, TrendingItem>() {
+class TrendingPageDataSource constructor(val trendingRemoteDataSource: TrendingRemoteDataSource) :
+    PagingSource<Int, TrendingItem>() {
 
     @ExperimentalPagingApi
     override fun getRefreshKey(state: PagingState<Int, TrendingItem>): Int? {
@@ -39,16 +40,16 @@ class TrendingPageDataSource constructor(val trendingRemoteDataSource: TrendingR
             val loadSize = params.loadSize
             val response = trendingRemoteDataSource.getProductList(nextPage, loadSize)
 
-            if(response.status == ApiResult.Status.SUCCESS){
+            if (response.status == ApiResult.Status.SUCCESS) {
                 LoadResult.Page(
                     data = response.data!!.results,
                     prevKey = if (nextPage == 1) null else nextPage - 1,
                     nextKey = nextPage + 1
                 )
-            }else{
-                if(response.errorType!!.type == ErrorType.Type.Generic) {
+            } else {
+                if (response.errorType!!.type == ErrorType.Type.Generic) {
                     LoadResult.Error(ApiThrowable("Error in api: GENERIC"))
-                }else{
+                } else {
                     LoadResult.Error(ApiThrowable("Error in api: BACKEND"))
                 }
             }
@@ -65,8 +66,12 @@ class TrendingPageDataSource constructor(val trendingRemoteDataSource: TrendingR
  * If want pagination  with database support
  */
 @ExperimentalPagingApi
-class TrendingMediator constructor(val trendingRemoteDataSource: TrendingRemoteDataSource, val trendingItemDao: TrendingItemDao, val remoteKeysDao: TrendingRemoteKeysDao) :
-        RemoteMediator<Int, TrendingItem>() {
+class TrendingMediator constructor(
+    val trendingRemoteDataSource: TrendingRemoteDataSource,
+    val trendingItemDao: TrendingItemDao,
+    val remoteKeysDao: TrendingRemoteKeysDao
+) :
+    RemoteMediator<Int, TrendingItem>() {
 
 
     /**
@@ -88,7 +93,10 @@ class TrendingMediator constructor(val trendingRemoteDataSource: TrendingRemoteD
 //
 //    }
 
-    override suspend fun load(loadType: LoadType, state: PagingState<Int, TrendingItem>): MediatorResult {
+    override suspend fun load(
+        loadType: LoadType,
+        state: PagingState<Int, TrendingItem>
+    ): MediatorResult {
 
         val pageKeyData = getKeyPageData(loadType, state)
         val page = when (pageKeyData) {
@@ -145,7 +153,7 @@ class TrendingMediator constructor(val trendingRemoteDataSource: TrendingRemoteD
             LoadType.APPEND -> {
                 val remoteKeys = getLastRemoteKey(state)
                 //crashing here
-                ?: throw InvalidObjectException("Remote key should not be null for $loadType")
+                    ?: throw InvalidObjectException("Remote key should not be null for $loadType")
                 val key = remoteKeys.nextKey
                 Timber.i("Append: $key")
                 key
@@ -153,7 +161,7 @@ class TrendingMediator constructor(val trendingRemoteDataSource: TrendingRemoteD
             LoadType.PREPEND -> {
                 val remoteKeys = getFirstRemoteKey(state)
                 //crashing here
-                ?: throw InvalidObjectException("Invalid state, key should not be null")
+                    ?: throw InvalidObjectException("Invalid state, key should not be null")
                 val key = remoteKeys.prevKey
                 Timber.i("Prepend: $key")
                 key
@@ -167,9 +175,9 @@ class TrendingMediator constructor(val trendingRemoteDataSource: TrendingRemoteD
      */
     private suspend fun getLastRemoteKey(state: PagingState<Int, TrendingItem>): TrendingRemtoteKey? {
         return state.pages
-                .lastOrNull { it.data.isNotEmpty() }
-                ?.data?.lastOrNull()
-                ?.let { tItem -> remoteKeysDao.remoteKeysTrendingId(tItem.id) }
+            .lastOrNull { it.data.isNotEmpty() }
+            ?.data?.lastOrNull()
+            ?.let { tItem -> remoteKeysDao.remoteKeysTrendingId(tItem.id) }
     }
 
     /**
@@ -178,9 +186,9 @@ class TrendingMediator constructor(val trendingRemoteDataSource: TrendingRemoteD
     private suspend fun getFirstRemoteKey(state: PagingState<Int, TrendingItem>): TrendingRemtoteKey? {
         //crashing when pages is giving 0 count insteead of 20
         return state.pages
-                .firstOrNull { it.data.isNotEmpty() }
-                ?.data?.firstOrNull()
-                ?.let { tItem -> remoteKeysDao.remoteKeysTrendingId(tItem.id) }
+            .firstOrNull { it.data.isNotEmpty() }
+            ?.data?.firstOrNull()
+            ?.let { tItem -> remoteKeysDao.remoteKeysTrendingId(tItem.id) }
     }
 
     /**

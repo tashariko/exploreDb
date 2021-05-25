@@ -4,13 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.core.content.edit
-import androidx.datastore.preferences.core.Preferences
-import androidx.datastore.preferences.core.edit
-import androidx.datastore.preferences.core.intPreferencesKey
-import androidx.datastore.preferences.createDataStore
 import com.tashariko.exploredb.application.AppConstants.SP_FILE_KEY
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.runBlocking
 import timber.log.Timber
 
 object SharedPreferenceHelper {
@@ -29,7 +23,7 @@ object SharedPreferenceHelper {
     fun getStringFromSharedPreference(context: Context, key: String): String {
         return getSharedPreferencesObject(context).getString(key, "0")?.let {
             it
-        }?: run {
+        } ?: run {
             "0"
         }
     }
@@ -38,7 +32,11 @@ object SharedPreferenceHelper {
         return getSharedPreferencesObject(context).getBoolean(key, false)
     }
 
-    fun getBooleanFromSharedPreference(context: Context, key: String, defaultValue: Boolean): Boolean {
+    fun getBooleanFromSharedPreference(
+        context: Context,
+        key: String,
+        defaultValue: Boolean
+    ): Boolean {
         return getSharedPreferencesObject(context).getBoolean(key, defaultValue)
     }
 

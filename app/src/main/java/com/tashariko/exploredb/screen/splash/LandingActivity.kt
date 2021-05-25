@@ -13,21 +13,16 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.lifecycle.ViewModelProvider
 import com.tashariko.exploredb.R
 import com.tashariko.exploredb.application.base.AppCompose
 import com.tashariko.exploredb.application.base.BaseActivity
 import com.tashariko.exploredb.network.result.ApiResult
 import com.tashariko.exploredb.network.result.ErrorType
 import com.tashariko.exploredb.screen.main.MainActivity
-import com.tashariko.exploredb.screen.main.movieDetail.MovieDetailViewModel
 import com.tashariko.exploredb.theming.appColor
 import com.tashariko.exploredb.theming.progessWidth
 import com.tashariko.exploredb.theming.space14
-import com.tashariko.exploredb.theming.space18
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class LandingActivity : BaseActivity() {

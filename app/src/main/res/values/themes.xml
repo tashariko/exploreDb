@@ -17,7 +17,6 @@
     </style>
 
 
-
     <style name="AppTheme.Fullscreen" parent="Theme.ExploreDb">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>

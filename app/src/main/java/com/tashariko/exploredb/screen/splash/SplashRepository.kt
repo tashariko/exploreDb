@@ -9,17 +9,19 @@ import javax.inject.Inject
 
 
 class LandingRepository @Inject constructor(
-        private val landingRemoteDataSource: LandingRemoteDataSource){
+    private val landingRemoteDataSource: LandingRemoteDataSource
+) {
 
-    fun getData() = object : NetworkBoundRepository<ConfigurationResponse, ConfigurationResponse>() {
-        override fun shouldfetchDataFromDbBeforeNetwork(): Boolean {
-            return false
-        }
+    fun getData() =
+        object : NetworkBoundRepository<ConfigurationResponse, ConfigurationResponse>() {
+            override fun shouldfetchDataFromDbBeforeNetwork(): Boolean {
+                return false
+            }
 
-        override fun shouldStoreDataInDbAfterNetwork(): Boolean {
-            return false
-        }
-    }.flowData(
+            override fun shouldStoreDataInDbAfterNetwork(): Boolean {
+                return false
+            }
+        }.flowData(
             databaseQuery = {
                 null
             },
@@ -32,11 +34,12 @@ class LandingRepository @Inject constructor(
             parseNetworkResponse = {
                 ApiResult.success(it)
             }
-    )
+        )
 
 }
 
-class LandingRemoteDataSource @Inject constructor(private val service: MiscApiService) : BaseDataSource() {
+class LandingRemoteDataSource @Inject constructor(private val service: MiscApiService) :
+    BaseDataSource() {
 
     suspend fun getData() = getResult {
         service.configuration()

@@ -20,7 +20,6 @@ val textLightColor = Color(0xff999999)
 val appExtreme = Color(0xfffffff)
 
 
-
 data class AppColors(
     val material: Colors,
     val primaryLight: Color,

@@ -29,7 +29,7 @@ fun AppTheme(
     }
 }
 
-public val MaterialTheme.appColor: AppColors
+val MaterialTheme.appColor: AppColors
     @Composable
     @ReadOnlyComposable
     get() = LocalColors.current

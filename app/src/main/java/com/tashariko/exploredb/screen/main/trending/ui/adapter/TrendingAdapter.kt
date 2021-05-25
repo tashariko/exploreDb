@@ -15,7 +15,7 @@ import com.tashariko.exploredb.screen.main.movieDetail.MovieDetailActivity
 
 class TrendingAdapter : PagingDataAdapter<TrendingItem, TrendingViewHolder>(
     CustomDiffCallback()
-){
+) {
 
     private lateinit var imagePaths: Triple<String, String, String>
 
@@ -41,16 +41,16 @@ class TrendingAdapter : PagingDataAdapter<TrendingItem, TrendingViewHolder>(
 class TrendingViewHolder(
     private val binding: ListItemTrendingBinding,
     val imagePaths: Triple<String, String, String>
-): RecyclerView.ViewHolder(binding.root) {
+) : RecyclerView.ViewHolder(binding.root) {
 
     private lateinit var trendingItem: TrendingItem
 
     init {
         binding.parentView.setOnClickListener {
-            if(trendingItem.mediaType == AppConstants.MediaType.MOVIE.value) {
+            if (trendingItem.mediaType == AppConstants.MediaType.MOVIE.value) {
                 MovieDetailActivity.launchActivity(itemView.context, trendingItem.id)
-            }else{
-                Toast.makeText(itemView.context,"Coming soon", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(itemView.context, "Coming soon", Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -77,7 +77,6 @@ class TrendingViewHolder(
     }
 
 }
-
 
 
 private class CustomDiffCallback : DiffUtil.ItemCallback<TrendingItem>() {
