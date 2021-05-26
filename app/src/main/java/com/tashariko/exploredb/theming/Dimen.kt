@@ -7,6 +7,7 @@ val textNormalSize = 16.sp
 val textTitleSize = 16.sp
 
 val progessWidth = 5.dp
+val progressSize = 35.dp
 
 val space14 = 14.dp
 val space18 = 18.dp

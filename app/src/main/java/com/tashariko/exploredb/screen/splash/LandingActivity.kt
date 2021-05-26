@@ -3,26 +3,29 @@ package com.tashariko.exploredb.screen.splash
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.livedata.observeAsState
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.constraintlayout.compose.ConstraintLayout
 import com.tashariko.exploredb.R
 import com.tashariko.exploredb.application.base.AppCompose
 import com.tashariko.exploredb.application.base.BaseActivity
 import com.tashariko.exploredb.network.result.ApiResult
-import com.tashariko.exploredb.network.result.ErrorType
 import com.tashariko.exploredb.screen.main.MainActivity
 import com.tashariko.exploredb.theming.appColor
 import com.tashariko.exploredb.theming.progessWidth
+import com.tashariko.exploredb.theming.progressSize
 import com.tashariko.exploredb.theming.space14
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
 @AndroidEntryPoint
 class LandingActivity : BaseActivity() {
@@ -60,68 +63,65 @@ class LandingActivity : BaseActivity() {
 
 @Composable
 fun ScreenContent(viewModel: SplashViewModel) {
+
     val viewModelState = viewModel.createTaskLiveData.observeAsState()
 
-
-    /**
-     * Convert in ConstraintLayout
-     * https://github.com/skydoves/disneycompose/blob/main/app/src/main/java/com/skydoves/disneycompose/ui/posters/Posters.kt
-     * https://developer.android.com/jetpack/compose/layout#constraints
-     */
     viewModelState.value?.let { state ->
-        Box(modifier = Modifier.fillMaxSize()) {
-            Column(modifier = Modifier.align(Alignment.Center)) {
-                Text(
-                    text = LocalContext.current.getString(R.string.app_name),
-                    style = MaterialTheme.typography.h4,
-                    fontWeight = FontWeight.Bold,
-                )
-                Spacer(modifier = Modifier.height(space14))
 
-                when (state.status) {
-                    ApiResult.Status.LOADING -> {
-                        CircularProgressIndicator(
-                            Modifier.align(Alignment.CenterHorizontally),
-                            color = MaterialTheme.appColor.primaryLight,
-                            strokeWidth = progessWidth
-                        )
+        ConstraintLayout(modifier = Modifier.fillMaxSize()) {
+            val (appName, spacer,spacer2, progress, button) = createRefs()
+            Text(
+                text = LocalContext.current.getString(R.string.app_name),
+                style = MaterialTheme.typography.h4,
+                fontWeight = FontWeight.Bold,
+                modifier = Modifier
+                    .constrainAs(appName) {
+                        centerTo(parent)
                     }
-                    ApiResult.Status.ERROR -> {
-                        state.errorType?.let { et ->
-                            if (et.type == ErrorType.Type.Generic) {
-                                (LocalContext.current as LandingActivity).showToast(
-                                    LocalContext.current.getString(
-                                        R.string.generic_error_message
-                                    )
-                                )
-                            } else {
-                                et.message?.let { msg ->
-                                    (LocalContext.current as LandingActivity).showToast(msg)
-                                } ?: run {
+            )
+            Spacer(modifier = Modifier
+                .height(space14)
+                .fillMaxWidth()
+                .constrainAs(spacer) {
+                    top.linkTo(appName.bottom)
+                    centerHorizontallyTo(appName)
+                })
 
-                                }
-                            }
-                        } ?: run {
-                            (LocalContext.current as LandingActivity).showToast(
-                                LocalContext.current.getString(
-                                    R.string.generic_error_message
-                                )
-                            )
-                        }
-                        Button(onClick = {
+            when (state.status) {
+                ApiResult.Status.LOADING -> {
+                    CircularProgressIndicator(color = MaterialTheme.appColor.primaryLight,
+                        strokeWidth = progessWidth,
+                        modifier = Modifier.height(progressSize).width(progressSize)
+                            .constrainAs(progress) {
+                                top.linkTo(spacer.bottom)
+                                centerHorizontallyTo(appName)
+                            })
+                }
+                ApiResult.Status.SUCCESS -> {
+                    //MainActivity.launchScreen(LocalContext.current)
+                    Toast.makeText(LocalContext.current.applicationContext,"Open main screen",Toast.LENGTH_SHORT).show()
+                }
 
-                        }, content = { Text(text = "Button") },
-                            colors = ButtonDefaults.buttonColors(
-                                backgroundColor = MaterialTheme.appColor.primaryLight,
-                            )
-                        )
-                    }
-                    ApiResult.Status.SUCCESS -> {
-                        MainActivity.launchScreen(LocalContext.current)
-                    }
+                ApiResult.Status.ERROR -> {
+                    Spacer(modifier = Modifier
+                        .height(space14)
+                        .fillMaxWidth()
+                        .constrainAs(spacer2) {
+                            bottom.linkTo(parent.bottom)
+                        })
+
+                    Button(onClick = {
+
+                    }, content = { Text(text = LocalContext.current.getString(R.string.retryText)) },
+                        colors = ButtonDefaults.buttonColors(
+                            backgroundColor = MaterialTheme.appColor.primaryLight,
+                        ),
+                        modifier = Modifier.constrainAs(button) {
+                            bottom.linkTo(spacer2.top)
+                            centerHorizontallyTo(parent)
+                        })
                 }
             }
         }
     }
-
 }
