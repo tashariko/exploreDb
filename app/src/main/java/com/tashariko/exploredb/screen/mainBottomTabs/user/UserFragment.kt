@@ -1,4 +1,4 @@
-package com.tashariko.exploredb.screen.main.user
+package com.tashariko.exploredb.screen.mainBottomTabs.user
 
 import android.os.Bundle
 import android.view.LayoutInflater

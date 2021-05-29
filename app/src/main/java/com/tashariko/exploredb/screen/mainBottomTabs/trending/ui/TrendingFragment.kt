@@ -1,4 +1,4 @@
-package com.tashariko.exploredb.screen.main.trending.ui
+package com.tashariko.exploredb.screen.mainBottomTabs.trending.ui
 
 import android.content.Context
 import android.os.Bundle
@@ -16,9 +16,9 @@ import com.tashariko.exploredb.R
 import com.tashariko.exploredb.application.AppConstants
 import com.tashariko.exploredb.application.base.BaseFragment
 import com.tashariko.exploredb.databinding.FragmentTrendingBinding
-import com.tashariko.exploredb.screen.main.SetMainTitle
-import com.tashariko.exploredb.screen.main.trending.ui.adapter.LoadingErrorAdapter
-import com.tashariko.exploredb.screen.main.trending.ui.adapter.TrendingAdapter
+import com.tashariko.exploredb.screen.mainBottomTabs.SetMainTitle
+import com.tashariko.exploredb.screen.mainBottomTabs.trending.ui.adapter.LoadingErrorAdapter
+import com.tashariko.exploredb.screen.mainBottomTabs.trending.ui.adapter.TrendingAdapter
 import com.tashariko.exploredb.util.NetworkObserver
 import dagger.hilt.android.AndroidEntryPoint
 

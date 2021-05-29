@@ -1,4 +1,4 @@
-package com.tashariko.exploredb.screen.main.trending.ui.adapter
+package com.tashariko.exploredb.screen.mainBottomTabs.trending.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -11,7 +11,7 @@ import com.tashariko.exploredb.R
 import com.tashariko.exploredb.application.AppConstants
 import com.tashariko.exploredb.database.entity.TrendingItem
 import com.tashariko.exploredb.databinding.ListItemTrendingBinding
-import com.tashariko.exploredb.screen.main.movieDetail.MovieDetailActivity
+import com.tashariko.exploredb.screen.mainBottomTabs.movieDetail.MovieDetailActivity
 
 class TrendingAdapter : PagingDataAdapter<TrendingItem, TrendingViewHolder>(
     CustomDiffCallback()

@@ -1,4 +1,4 @@
-package com.tashariko.exploredb.screen.main.trending.ui
+package com.tashariko.exploredb.screen.mainBottomTabs.trending.ui
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.asLiveData
@@ -8,7 +8,7 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.tashariko.exploredb.application.base.BaseViewModel
 import com.tashariko.exploredb.database.entity.TrendingItem
-import com.tashariko.exploredb.screen.main.trending.data.TrendingRepository
+import com.tashariko.exploredb.screen.mainBottomTabs.trending.data.TrendingRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 

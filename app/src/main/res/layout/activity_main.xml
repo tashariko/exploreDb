@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/screenBgColor"
-    tools:context=".screen.main.MainActivity">
+    tools:context=".screen.mainBottomTabs.MainActivityOld">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbarView"

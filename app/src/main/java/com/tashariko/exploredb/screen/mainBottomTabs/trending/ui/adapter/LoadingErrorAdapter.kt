@@ -1,4 +1,4 @@
-package com.tashariko.exploredb.screen.main.trending.ui.adapter
+package com.tashariko.exploredb.screen.mainBottomTabs.trending.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

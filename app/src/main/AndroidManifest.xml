@@ -26,12 +26,13 @@
         </activity>
         <activity
             android:name=".screen.splash.LandingActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+             android:theme="@style/AppTheme.Fullscreen"/>
 
-        <activity android:name=".screen.main.MainActivity"
+        <activity android:name=".screen.mainBottomTabs.MainActivity"
             android:screenOrientation="portrait"/>
 
-        <activity android:name=".screen.main.movieDetail.MovieDetailActivity"
+        <activity android:name=".screen.mainBottomTabs.movieDetail.MovieDetailActivity"
             android:screenOrientation="portrait"/>
 
     </application>

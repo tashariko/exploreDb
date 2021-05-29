@@ -1,4 +1,4 @@
-package com.tashariko.exploredb.screen.main
+package com.tashariko.exploredb.screen.mainBottomTabs
 
 import android.content.Context
 import android.content.Intent
@@ -7,11 +7,11 @@ import com.tashariko.exploredb.R
 import com.tashariko.exploredb.application.AppConstants
 import com.tashariko.exploredb.application.base.BaseActivity
 import com.tashariko.exploredb.databinding.ActivityMainBinding
-import com.tashariko.exploredb.screen.main.trending.ui.TrendingFragment
+import com.tashariko.exploredb.screen.mainBottomTabs.trending.ui.TrendingFragment
 import com.tashariko.exploredb.util.SharedPreferenceHelper
 import javax.inject.Inject
 
-class MainActivity : BaseActivity(), SetMainTitle {
+class MainActivityOld : BaseActivity(), SetMainTitle {
 
     lateinit var binding: ActivityMainBinding
 
@@ -19,8 +19,8 @@ class MainActivity : BaseActivity(), SetMainTitle {
     lateinit var trendingFragment: TrendingFragment
 
     companion object {
-        fun launchScreen(context: Context) {
-            context.startActivity(Intent(context, MainActivity::class.java))
+        fun launchSdcreen(context: Context) {
+            context.startActivity(Intent(context, MainActivityOld::class.java))
             (context as BaseActivity).finish()
         }
     }

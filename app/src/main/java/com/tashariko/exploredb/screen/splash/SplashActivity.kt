@@ -7,6 +7,11 @@ import com.tashariko.exploredb.application.base.BaseActivity
 
 class SplashActivity : BaseActivity() {
 
+    /**
+     * Bug:
+     * Not going fullscreen
+     */
+
     companion object {
         fun relaunchApp(context: Context) {
             val mainIntent = Intent(context, SplashActivity::class.java)

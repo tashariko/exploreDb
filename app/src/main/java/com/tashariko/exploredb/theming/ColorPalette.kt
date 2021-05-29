@@ -12,9 +12,11 @@ internal val LightColorPalette = AppColors(
     material = lightColors(
         primary = colorPrimary,
         primaryVariant = colorPrimaryDark,
+        onPrimary = screenBgColor,
         surface = screenBgColor,
         secondary = colorSecondary,
         secondaryVariant = colorSecondaryDark,
+        onSecondary = screenBgColor,
         background = screenBgColor
     ),
     primaryLight = colorPrimaryLight,
@@ -30,9 +32,11 @@ internal val DarkColorPalette = AppColors(
     material = darkColors(
         primary = colorPrimary,
         primaryVariant = colorPrimaryDark,
+        onPrimary = screenBgColor,
         surface = screenBgColor,
         secondary = colorSecondary,
         secondaryVariant = colorSecondaryDark,
+        onSecondary = screenBgColor,
         background = screenBgColor
     ),
     primaryLight = colorPrimaryLight,
