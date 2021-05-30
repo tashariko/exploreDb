@@ -27,14 +27,14 @@ Used api :
 Pagination work:
 [Android-Paging 3.0](https://medium.com/@paulhundal/paging-library-with-android-mvvm-6a3a4d94de72)
 
+## WIP
+* [Jetpack Compose](https://github.com/tashariko/exploreDb/tree/ComposeWork)
 
 ## Plan for next iteration but to eventually forget
 * Add Search api
 * Add Test cases
 
-
 ## In a galaxy far far away
-* Jetpack Compose
 * Use scoped storage: https://medium.com/better-programming/android-scoped-storage-demystified-3024a062ba24
 * Implement lifecycleowner with handling all lifecycle events
 * Motionlayout with some magical animations
