@@ -1,4 +1,4 @@
-package com.tashariko.exploredb.screen.home
+package com.tashariko.exploredb.screen.home.mainNav
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier

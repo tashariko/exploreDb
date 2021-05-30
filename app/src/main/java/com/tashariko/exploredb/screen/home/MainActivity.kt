@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.activity.compose.setContent
 import com.tashariko.exploredb.application.base.AppCompose
 import com.tashariko.exploredb.application.base.BaseActivity
+import com.tashariko.exploredb.screen.home.mainNav.MainScreenContent
 
 class MainActivity : BaseActivity() {
 
