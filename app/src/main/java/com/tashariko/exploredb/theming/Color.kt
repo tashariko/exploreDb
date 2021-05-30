@@ -9,7 +9,9 @@ val colorPrimary = Color(0xFF6200EE)
 val colorPrimaryDark = Color(0xFF3700B3)
 val colorSecondary = Color(0xFF03DAC5)
 val colorSecondaryDark = Color(0xFF018786)
+
 val screenBgColor = Color(0xFFFFFFFF)
+val screenBgColorDark = Color(0x00000000)
 
 val buttonDisabled = Color(0xffe3cefd)
 val offlineColor = Color(0xffab2323)
@@ -17,7 +19,7 @@ val transparent = Color(0x00ffffff)
 
 val appTextColor = Color(0xff333333)
 val textLightColor = Color(0xff999999)
-val appExtreme = Color(0xfffffff)
+val appExtreme = Color(0xffffffff)
 
 
 data class AppColors(

@@ -20,5 +20,10 @@ object AppConstants {
     enum class MediaType(val value: String) {
         TV("tv"), MOVIE("movie")
     }
+}
 
+object NavRouteConstants {
+    const val ROUTE_HOME_TRENDING = "home/trending"
+    const val ROUTE_HOME_SEARCH = "home/search"
+    const val ROUTE_HOME_USER = "home/user"
 }

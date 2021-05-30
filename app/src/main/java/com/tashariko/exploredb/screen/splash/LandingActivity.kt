@@ -17,7 +17,7 @@ import com.tashariko.exploredb.R
 import com.tashariko.exploredb.application.base.AppCompose
 import com.tashariko.exploredb.application.base.BaseActivity
 import com.tashariko.exploredb.network.result.ApiResult
-import com.tashariko.exploredb.screen.mainBottomTabs.MainActivity
+import com.tashariko.exploredb.screen.home.MainActivity
 import com.tashariko.exploredb.theming.appColor
 import com.tashariko.exploredb.theming.progessWidth
 import com.tashariko.exploredb.theming.progressSize
@@ -73,7 +73,7 @@ fun ScreenContent(viewModel: SplashViewModel) {
          * https://blog.mindorks.com/constraint-layout-in-jetpack-compose
          */
         ConstraintLayout(modifier = Modifier.fillMaxSize()) {
-            val (appName, spacer,spacer2, progress, button) = createRefs()
+            val (appName, spacer, spacer2, progress, button) = createRefs()
             Text(
                 text = LocalContext.current.getString(R.string.app_name),
                 style = MaterialTheme.typography.h4,
@@ -116,7 +116,8 @@ fun ScreenContent(viewModel: SplashViewModel) {
                             bottom.linkTo(parent.bottom)
                         })
 
-                    Button(onClick = {viewModel.getConfig(context = context)}, content = { Text(text = LocalContext.current.getString(R.string.retryText)) },
+                    Button(onClick = { viewModel.getConfig(context = context) },
+                        content = { Text(text = LocalContext.current.getString(R.string.retryText)) },
                         colors = ButtonDefaults.buttonColors(
                             backgroundColor = MaterialTheme.appColor.primaryLight,
                         ),

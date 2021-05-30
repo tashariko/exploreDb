@@ -1,8 +1,9 @@
-package com.tashariko.exploredb.screen.mainBottomTabs
+package com.tashariko.exploredb.screen.home
 
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.compose.setContent
 import com.tashariko.exploredb.application.base.AppCompose
 import com.tashariko.exploredb.application.base.BaseActivity
@@ -20,7 +21,9 @@ class MainActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             AppCompose {
-                MainScreenContent()
+                MainScreenContent(languageChanged = {
+                    Toast.makeText(this, "In Progress", Toast.LENGTH_SHORT).show()
+                })
             }
         }
     }

@@ -1,4 +1,4 @@
-package com.tashariko.exploredb.screen.mainBottomTabs.movieDetail
+package com.tashariko.exploredb.screen.movieDetail
 
 import android.content.Context
 import android.content.Intent

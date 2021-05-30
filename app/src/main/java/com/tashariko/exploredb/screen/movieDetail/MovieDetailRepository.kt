@@ -1,4 +1,4 @@
-package com.tashariko.exploredb.screen.mainBottomTabs.movieDetail
+package com.tashariko.exploredb.screen.movieDetail
 
 import com.tashariko.exploredb.application.base.BaseDataSource
 import com.tashariko.exploredb.database.dao.MovieDao

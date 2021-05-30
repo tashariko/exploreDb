@@ -1,4 +1,4 @@
-package com.tashariko.exploredb.screen.mainBottomTabs.movieDetail
+package com.tashariko.exploredb.screen.movieDetail
 
 import androidx.lifecycle.viewModelScope
 import com.tashariko.exploredb.application.base.BaseViewModel

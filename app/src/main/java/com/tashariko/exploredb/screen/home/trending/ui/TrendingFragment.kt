@@ -1,4 +1,4 @@
-package com.tashariko.exploredb.screen.mainBottomTabs.trending.ui
+package com.tashariko.exploredb.screen.home.trending.ui
 
 import android.content.Context
 import android.os.Bundle
@@ -16,9 +16,8 @@ import com.tashariko.exploredb.R
 import com.tashariko.exploredb.application.AppConstants
 import com.tashariko.exploredb.application.base.BaseFragment
 import com.tashariko.exploredb.databinding.FragmentTrendingBinding
-import com.tashariko.exploredb.screen.mainBottomTabs.SetMainTitle
-import com.tashariko.exploredb.screen.mainBottomTabs.trending.ui.adapter.LoadingErrorAdapter
-import com.tashariko.exploredb.screen.mainBottomTabs.trending.ui.adapter.TrendingAdapter
+import com.tashariko.exploredb.screen.home.trending.ui.adapter.LoadingErrorAdapter
+import com.tashariko.exploredb.screen.home.trending.ui.adapter.TrendingAdapter
 import com.tashariko.exploredb.util.NetworkObserver
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -28,7 +27,6 @@ class TrendingFragment : BaseFragment() {
     private val viewModel by viewModels<TrendingViewModel>()
 
     lateinit var binding: FragmentTrendingBinding
-    lateinit var delegate: SetMainTitle
 
     private val adapter: TrendingAdapter by lazy {
         TrendingAdapter()
@@ -54,7 +52,7 @@ class TrendingFragment : BaseFragment() {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         try {
-            delegate = context as SetMainTitle
+           // delegate = context as SetMainTitle
         } catch (e: ClassCastException) {
             throw ClassCastException(activity.toString() + " must implement SetMainTitle")
         }
@@ -97,7 +95,7 @@ class TrendingFragment : BaseFragment() {
     }
 
     override fun viewlisteners() {
-        delegate.setTitle(getString(R.string.fragment_trending_title))
+        //delegate.setTitle(getString(R.string.fragment_trending_title))
 
         adapter.addLoadStateListener { loadState ->
             if (loadState.refresh is LoadState.Loading) {

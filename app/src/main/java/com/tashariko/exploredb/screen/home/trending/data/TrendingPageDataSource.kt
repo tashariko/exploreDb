@@ -1,4 +1,4 @@
-package com.tashariko.exploredb.screen.mainBottomTabs.trending.data
+package com.tashariko.exploredb.screen.home.trending.data
 
 import androidx.paging.*
 import com.tashariko.exploredb.database.dao.TrendingItemDao

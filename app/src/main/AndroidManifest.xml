@@ -29,10 +29,10 @@
             android:screenOrientation="portrait"
              android:theme="@style/AppTheme.Fullscreen"/>
 
-        <activity android:name=".screen.mainBottomTabs.MainActivity"
+        <activity android:name=".screen.home.MainActivity"
             android:screenOrientation="portrait"/>
 
-        <activity android:name=".screen.mainBottomTabs.movieDetail.MovieDetailActivity"
+        <activity android:name="com.tashariko.exploredb.screen.movieDetail.MovieDetailActivity"
             android:screenOrientation="portrait"/>
 
     </application>
