@@ -21,6 +21,7 @@ class MainActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
+            
             AppCompose {
                 MainScreenContent(languageChanged = {
                     Toast.makeText(this, "In Progress", Toast.LENGTH_SHORT).show()
