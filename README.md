@@ -28,6 +28,7 @@ Pagination work:
 
 ## WIP
 * [Jetpack Compose](https://github.com/tashariko/exploreDb/tree/ComposeWork)
+* Pagination
 
 ## Plan for next iteration but to eventually forget
 * Add Search api
