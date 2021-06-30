@@ -8,15 +8,14 @@ import android.net.NetworkRequest
 import android.os.Build
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.flow
 
-object NetworkObserver: ConnectivityManager.NetworkCallback() {
+object NetworkObserver : ConnectivityManager.NetworkCallback() {
 
     private val netLiveData: MutableLiveData<Boolean> = MutableLiveData()
 
     fun getNetLiveData(context: Context): LiveData<Boolean> {
-        val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val connectivityManager =
+            context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             connectivityManager.registerDefaultNetworkCallback(this)
@@ -27,7 +26,8 @@ object NetworkObserver: ConnectivityManager.NetworkCallback() {
 
         var isNetAvailable = false
 
-        connectivityManager.allNetworks.forEach { network -> val netCapabilities = connectivityManager.getNetworkCapabilities(network)
+        connectivityManager.allNetworks.forEach { network ->
+            val netCapabilities = connectivityManager.getNetworkCapabilities(network)
 
             netCapabilities?.let {
                 if (it.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)) {

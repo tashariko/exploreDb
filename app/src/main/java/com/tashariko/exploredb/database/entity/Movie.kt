@@ -8,79 +8,79 @@ import kotlinx.android.parcel.Parcelize
 
 @Entity(tableName = "movie")
 @Parcelize
-data class Movie (
+data class Movie(
 
-        @PrimaryKey(autoGenerate = true)
-        val localId: Long? = null,
+    @PrimaryKey(autoGenerate = true)
+    val localId: Long? = null,
 
-        val adult: Boolean,
+    val adult: Boolean,
 
-        @SerializedName("backdrop_path")
-        val backdropPath: String,
+    @SerializedName("backdrop_path")
+    val backdropPath: String,
 
 //        @SerializedName("belongs_to_collection")
 //        val belongsToCollection: JsonObject? = null,
 
-        @SerializedName("budget")
-        val budget: Long,
+    @SerializedName("budget")
+    val budget: Long,
 
-        @SerializedName("genres")
-        val genres: ArrayList<Genre>? = null,
+    @SerializedName("genres")
+    val genres: ArrayList<Genre>? = null,
 
-        val homepage: String,
-        val id: Long,
+    val homepage: String,
+    val id: Long,
 
-        @SerializedName("imdb_id")
-        val imdbID: String,
+    @SerializedName("imdb_id")
+    val imdbID: String,
 
-        @SerializedName("original_language")
-        val originalLanguage: String,
+    @SerializedName("original_language")
+    val originalLanguage: String,
 
-        @SerializedName("original_title")
-        val originalTitle: String,
+    @SerializedName("original_title")
+    val originalTitle: String,
 
-        val overview: String,
-        val popularity: Double,
+    val overview: String,
+    val popularity: Double,
 
-        @SerializedName("poster_path")
-        val posterPath: String,
+    @SerializedName("poster_path")
+    val posterPath: String,
 
-        @SerializedName("production_companies")
-        val productionCompanies: ArrayList<ProductionCompany>? = null,
+    @SerializedName("production_companies")
+    val productionCompanies: ArrayList<ProductionCompany>? = null,
 
 //        @SerializedName("production_countries")
 //        val productionCountries: ArrayList<ProductionCountry>? = null,
 
-        @SerializedName("release_date")
-        val releaseDate: String,
+    @SerializedName("release_date")
+    val releaseDate: String,
 
-        val revenue: Long,
-        val runtime: Long,
+    val revenue: Long,
+    val runtime: Long,
 
-        @SerializedName("spoken_languages")
-        val spokenLanguages: ArrayList<SpokenLanguage>? = null,
+    @SerializedName("spoken_languages")
+    val spokenLanguages: ArrayList<SpokenLanguage>? = null,
 
-        val status: String,
-        val tagline: String,
-        val title: String,
-        val video: Boolean,
+    val status: String,
+    val tagline: String,
+    val title: String,
+    val video: Boolean,
 
-        @SerializedName("vote_average")
-        val voteAverage: Double,
+    @SerializedName("vote_average")
+    val voteAverage: Double,
 
-        @SerializedName("vote_count")
-        val voteCount: Long
-): Parcelable
+    @SerializedName("vote_count")
+    val voteCount: Long
+) : Parcelable
 
 @Parcelize
-data class ProductionCompany (
-        val id: Long,
+data class ProductionCompany(
+    val id: Long,
 
-        @SerializedName("logo_path")
-        val logoPath: String,
+    @SerializedName("logo_path")
+    val logoPath: String,
 
-        val name: String,
+    val name: String,
 
-        @SerializedName("origin_country")
-        val originCountry: String
-): Parcelable
+    @SerializedName("origin_country")
+    val originCountry: String
+) : Parcelable

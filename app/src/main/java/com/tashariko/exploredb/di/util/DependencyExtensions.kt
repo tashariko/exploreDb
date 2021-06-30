@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModelProvider
  * Kotlin extensions for dependency injection
  */
 
-inline fun <reified VM : ViewModel> FragmentActivity.injectViewModel( factory: ViewModelProvider.Factory): VM {
+inline fun <reified VM : ViewModel> FragmentActivity.injectViewModel(factory: ViewModelProvider.Factory): VM {
     return ViewModelProvider(this, factory)[VM::class.java]
 }
 

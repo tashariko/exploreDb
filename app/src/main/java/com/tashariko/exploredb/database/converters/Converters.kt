@@ -11,7 +11,8 @@ import java.util.*
  */
 class Converters {
 
-    @TypeConverter fun userLangToString(status: USER_LANGUAGE): String? {
+    @TypeConverter
+    fun userLangToString(status: USER_LANGUAGE): String? {
         return when (status) {
             USER_LANGUAGE.HINDI -> {
                 USER_LANGUAGE.HINDI.language
@@ -22,7 +23,8 @@ class Converters {
         }
     }
 
-    @TypeConverter fun stringToUserLang(string: String) = USER_LANGUAGE.valueOf(string)
+    @TypeConverter
+    fun stringToUserLang(string: String) = USER_LANGUAGE.valueOf(string)
 
 
     @TypeConverter

@@ -2,26 +2,21 @@ package com.tashariko.exploredb.application
 
 import android.app.Activity
 import android.app.Service
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.Observer
-import androidx.lifecycle.asLiveData
 import androidx.multidex.MultiDexApplication
 import androidx.work.*
 import com.facebook.stetho.Stetho
 import com.tashariko.exploredb.BuildConfig
 import com.tashariko.exploredb.di.injectable.AppInjector
 import com.tashariko.exploredb.di.util.HasWorkerInjector
-import com.tashariko.exploredb.util.NetworkObserver
-import com.tashariko.exploredb.util.SingleLiveEvent
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector
 import dagger.android.HasServiceInjector
 import timber.log.Timber
-import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
-class MainApplication: MultiDexApplication(), HasActivityInjector, HasServiceInjector, HasWorkerInjector {
+class MainApplication : MultiDexApplication(), HasActivityInjector, HasServiceInjector,
+    HasWorkerInjector {
 
 
     @Inject
@@ -35,7 +30,6 @@ class MainApplication: MultiDexApplication(), HasActivityInjector, HasServiceInj
 
     @Inject
     lateinit var androidWorkerInjector: DispatchingAndroidInjector<CoroutineWorker>
-
 
 
     override fun onCreate() {

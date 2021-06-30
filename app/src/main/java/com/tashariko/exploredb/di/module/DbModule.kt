@@ -47,7 +47,8 @@ class DbModule {
 
     @Provides
     @Singleton
-    fun provideTrendingItemDao(appDatabase: AppDatabase): TrendingItemDao = appDatabase.trendingItemDao()
+    fun provideTrendingItemDao(appDatabase: AppDatabase): TrendingItemDao =
+        appDatabase.trendingItemDao()
 
     @Provides
     @Singleton
@@ -55,5 +56,6 @@ class DbModule {
 
     @Provides
     @Singleton
-    fun provideTrendingRemtoteKeysDao(appDatabase: AppDatabase): TrendingRemoteKeysDao = appDatabase.trendingRemtoteKeysDao()
+    fun provideTrendingRemtoteKeysDao(appDatabase: AppDatabase): TrendingRemoteKeysDao =
+        appDatabase.trendingRemtoteKeysDao()
 }

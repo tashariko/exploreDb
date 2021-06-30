@@ -8,17 +8,15 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.snackbar.Snackbar
 import com.tashariko.exploredb.R
-import com.tashariko.exploredb.application.AppConstants
 import com.tashariko.exploredb.application.base.BaseActivity
 import com.tashariko.exploredb.databinding.ActivityLandingBinding
 import com.tashariko.exploredb.di.util.injectViewModel
 import com.tashariko.exploredb.network.result.ApiResult
 import com.tashariko.exploredb.network.result.ErrorType
 import com.tashariko.exploredb.screen.main.MainActivity
-import com.tashariko.exploredb.util.SharedPreferenceHelper
 import javax.inject.Inject
 
-class LandingActivity: BaseActivity() {
+class LandingActivity : BaseActivity() {
 
     companion object {
 
@@ -59,7 +57,7 @@ class LandingActivity: BaseActivity() {
         viewModel.createTaskLiveData.observe(this, Observer {
             binding.progressBar.isVisible = false
             binding.retryButton.isVisible = false
-            when(it.status) {
+            when (it.status) {
                 ApiResult.Status.LOADING -> {
                     binding.progressBar.isVisible = true
                 }
@@ -68,16 +66,16 @@ class LandingActivity: BaseActivity() {
                 }
                 ApiResult.Status.ERROR -> {
                     it.errorType?.let { et ->
-                        if(et.type == ErrorType.Type.Generic) {
+                        if (et.type == ErrorType.Type.Generic) {
                             showToast(getString(R.string.generic_error_message))
-                        }else{
-                            et.message?.let {msg ->
+                        } else {
+                            et.message?.let { msg ->
                                 Snackbar.make(binding.root, msg, Snackbar.LENGTH_SHORT).show()
-                            }?:run{
+                            } ?: run {
                                 showToast(getString(R.string.generic_error_message))
                             }
                         }
-                    }?:run{
+                    } ?: run {
                         showToast(getString(R.string.generic_error_message))
                     }
                     binding.retryButton.isVisible = true

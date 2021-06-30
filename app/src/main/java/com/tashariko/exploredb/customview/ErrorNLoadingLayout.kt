@@ -23,7 +23,7 @@ class ErrorNLoadingLayout : LinearLayout {
     private lateinit var dataView: View
     private var parentName = ""
 
-    constructor(context: Context?) : super(context) {}
+    constructor(context: Context?) : super(context)
     constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs) {
         initView()
     }
@@ -98,7 +98,7 @@ class ErrorNLoadingLayout : LinearLayout {
         progressSubtextView.visibility = View.GONE
     }
 
-    fun hideView(){
+    fun hideView() {
         dataView.visibility = View.GONE
         progressBarView.visibility = View.GONE
         progressMessageView.visibility = View.GONE

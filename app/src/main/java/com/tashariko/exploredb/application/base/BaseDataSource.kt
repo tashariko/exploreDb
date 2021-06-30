@@ -1,11 +1,8 @@
 package com.tashariko.exploredb.application.base
 
-import com.google.gson.JsonObject
-import com.google.gson.JsonParser
-import com.tashariko.exploredb.network.result.ErrorType
 import com.tashariko.exploredb.network.result.ApiResult
+import com.tashariko.exploredb.network.result.ErrorType
 import retrofit2.Response
-import timber.log.Timber
 
 
 /**
@@ -28,10 +25,15 @@ abstract class BaseDataSource {
 //            val jsonObject: JsonObject = JsonParser().parse(it.string()).asJsonObject
 //            msg = jsonObject.get("err").asString
 //        }
-        return if(msg.isNullOrEmpty()){
-            ApiResult.error( errorType = ErrorType(ErrorType.Type.Backend, "Error: ${response.errorBody()} ${response.message()}"))
-        }else{
-            ApiResult.error( errorType = ErrorType(ErrorType.Type.Backend, "Error: $msg"))
+        return if (msg.isNullOrEmpty()) {
+            ApiResult.error(
+                errorType = ErrorType(
+                    ErrorType.Type.Backend,
+                    "Error: ${response.errorBody()} ${response.message()}"
+                )
+            )
+        } else {
+            ApiResult.error(errorType = ErrorType(ErrorType.Type.Backend, "Error: $msg"))
         }
     }
 

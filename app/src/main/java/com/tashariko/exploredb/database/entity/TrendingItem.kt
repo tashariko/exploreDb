@@ -3,19 +3,18 @@ package com.tashariko.exploredb.database.entity
 import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 
 @Entity(tableName = "trending_item")
 @Parcelize
-data class TrendingItem (
+data class TrendingItem(
 
-        @PrimaryKey (autoGenerate = true)
-        val localId: Long? = null,
+    @PrimaryKey(autoGenerate = true)
+    val localId: Long? = null,
 
-        @SerializedName("id")
-        val id: Long,
+    @SerializedName("id")
+    val id: Long,
 //
 //        @SerializedName("backdrop_path")
 //        val backdropPath: String,
@@ -26,14 +25,14 @@ data class TrendingItem (
 //        @SerializedName("original_language")
 //        val originalLanguage: String,
 
-        @SerializedName("original_title")
-        val originalTitle: String? = null,
+    @SerializedName("original_title")
+    val originalTitle: String? = null,
 
-        @SerializedName("poster_path")
-        val posterPath: String? = null,
+    @SerializedName("poster_path")
+    val posterPath: String? = null,
 
-        @SerializedName("overview")
-        val overview: String? = null,
+    @SerializedName("overview")
+    val overview: String? = null,
 //
 //
 //        @SerializedName("title")
@@ -57,10 +56,15 @@ data class TrendingItem (
 //        @SerializedName("popularity")
 //        val popularity: Double,
 //
-        @SerializedName("media_type")
-        val mediaType: String
-): Parcelable
+    @SerializedName("media_type")
+    val mediaType: String
+) : Parcelable
 
 @Entity(tableName = "trending_remote_key")
 @Parcelize
-data class TrendingRemtoteKey(@PrimaryKey (autoGenerate = true) val localId: Long? = null, val repoId: Long, val prevKey: Int?, val nextKey: Int?): Parcelable
+data class TrendingRemtoteKey(
+    @PrimaryKey(autoGenerate = true) val localId: Long? = null,
+    val repoId: Long,
+    val prevKey: Int?,
+    val nextKey: Int?
+) : Parcelable

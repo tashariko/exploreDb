@@ -7,7 +7,7 @@ import com.tashariko.exploredb.application.base.BaseActivity
 
 class SplashActivity : BaseActivity() {
 
-    companion object{
+    companion object {
         fun relaunchApp(context: Context) {
             val mainIntent = Intent(context, SplashActivity::class.java)
             mainIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)

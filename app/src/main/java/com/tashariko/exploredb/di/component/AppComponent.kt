@@ -1,21 +1,15 @@
 package com.tashariko.exploredb.di.component
 
+
 import android.app.Application
-import androidx.startup.Initializer
 import com.tashariko.exploredb.application.MainApplication
 import com.tashariko.exploredb.di.module.*
-import javax.inject.Singleton
-
-
 import dagger.BindsInstance
-
 import dagger.Component
-
 import dagger.android.AndroidInjectionModule
-
 import dagger.android.AndroidInjector
-
 import dagger.android.support.DaggerApplication
+import javax.inject.Singleton
 
 
 @Singleton

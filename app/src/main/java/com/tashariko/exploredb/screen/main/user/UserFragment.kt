@@ -8,11 +8,15 @@ import com.tashariko.exploredb.application.base.BaseFragment
 import com.tashariko.exploredb.databinding.FragmentUserBinding
 import javax.inject.Inject
 
-class UserFragment @Inject constructor():  BaseFragment() {
+class UserFragment @Inject constructor() : BaseFragment() {
 
     lateinit var binding: FragmentUserBinding
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         binding = FragmentUserBinding.inflate(inflater, container, false)
         rootview = binding.root
         bindAndSetupUI()

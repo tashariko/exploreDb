@@ -11,11 +11,12 @@ import com.tashariko.exploredb.di.util.AndroidWorkerInjection
 import com.tashariko.exploredb.network.result.ApiResult
 import com.tashariko.exploredb.screen.splash.LandingRepository
 import com.tashariko.exploredb.util.SharedPreferenceHelper
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.first
 import timber.log.Timber
 import javax.inject.Inject
 
-class ConfigurationWorker constructor(context: Context, workerParams: WorkerParameters) : CoroutineWorker(context, workerParams) {
+class ConfigurationWorker constructor(context: Context, workerParams: WorkerParameters) :
+    CoroutineWorker(context, workerParams) {
 
     val MAX_COUNT = 3
 
@@ -31,9 +32,9 @@ class ConfigurationWorker constructor(context: Context, workerParams: WorkerPara
     override suspend fun doWork(): Result {
         Timber.i("HAHA__started")
 
-        if(count <= MAX_COUNT) {
+        if (count <= MAX_COUNT) {
             count += 1
-        }else{
+        } else {
             return Result.failure()
         }
 
@@ -42,15 +43,19 @@ class ConfigurationWorker constructor(context: Context, workerParams: WorkerPara
         }
 
         Timber.i("HAHA__done")
-        return if(status.status == ApiResult.Status.SUCCESS){
+        return if (status.status == ApiResult.Status.SUCCESS) {
             Timber.i("HAHA__success")
             val gson = Gson()
             val type = object : TypeToken<JsonObject>() {}.type
-            val configString =  gson.toJson(status.data!!, type)
-            SharedPreferenceHelper.putInSharedPreference(applicationContext, AppConstants.SP_KEY_CONFIG, configString)
+            val configString = gson.toJson(status.data!!, type)
+            SharedPreferenceHelper.putInSharedPreference(
+                applicationContext,
+                AppConstants.SP_KEY_CONFIG,
+                configString
+            )
             Result.success()
 
-        }else{
+        } else {
             Timber.i("HAHA__retry")
             Result.retry()
         }

@@ -15,7 +15,7 @@ import com.tashariko.exploredb.database.entity.User
 
 
 @Database(
-        entities = [User::class, TrendingItem::class, TrendingRemtoteKey::class, Movie::class],
+    entities = [User::class, TrendingItem::class, TrendingRemtoteKey::class, Movie::class],
     version = 1,
     exportSchema = false
 )

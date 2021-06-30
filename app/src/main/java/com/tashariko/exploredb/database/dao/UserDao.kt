@@ -7,7 +7,6 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.tashariko.exploredb.database.entity.User
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.distinctUntilChanged
 
 
@@ -29,7 +28,7 @@ interface UserDao {
 
     //POINTER: In this case, it will only emit until changed for user "userId"
     fun getUserDistinctUntilChanged(userId: Long) =
-            getFlowUser(userId).distinctUntilChanged()
+        getFlowUser(userId).distinctUntilChanged()
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(users: List<User>)

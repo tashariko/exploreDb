@@ -12,7 +12,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.tashariko.exploredb.R
 import com.tashariko.exploredb.application.AppConstants
 import com.tashariko.exploredb.application.base.BaseFragment
@@ -23,10 +22,9 @@ import com.tashariko.exploredb.screen.main.trending.ui.adapter.LoadingErrorAdapt
 import com.tashariko.exploredb.screen.main.trending.ui.adapter.TrendingAdapter
 import com.tashariko.exploredb.util.NetworkObserver
 import kotlinx.android.synthetic.main.fragment_trending.*
-import kotlinx.coroutines.flow.collect
 import javax.inject.Inject
 
-class TrendingFragment @Inject constructor(): BaseFragment()  {
+class TrendingFragment @Inject constructor() : BaseFragment() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -40,7 +38,11 @@ class TrendingFragment @Inject constructor(): BaseFragment()  {
     }
 
     @ExperimentalPagingApi
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         binding = FragmentTrendingBinding.inflate(inflater, container, false)
         rootview = binding.root
         viewModel = injectViewModel(viewModelFactory)
@@ -70,8 +72,11 @@ class TrendingFragment @Inject constructor(): BaseFragment()  {
 
         adapter.setBaseImageUrl(viewModel.getImagePath(requireContext()))
 
-        binding.errorLoadingContainerView.addDataView(binding.swipeRefreshLayout, javaClass.simpleName)
-        binding.recyclerView.adapter = adapter.withLoadStateFooter(LoadingErrorAdapter{
+        binding.errorLoadingContainerView.addDataView(
+            binding.swipeRefreshLayout,
+            javaClass.simpleName
+        )
+        binding.recyclerView.adapter = adapter.withLoadStateFooter(LoadingErrorAdapter {
             adapter.retry()
         })
         //adapter.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
@@ -86,11 +91,11 @@ class TrendingFragment @Inject constructor(): BaseFragment()  {
         })
 
         NetworkObserver.getNetLiveData(requireActivity()).observe(viewLifecycleOwner, Observer {
-          it?.let {
-              binding.offlineContainerView.isVisible = it
-          }  ?:run {
-             binding.offlineContainerView.isVisible = false
-          }
+            it?.let {
+                binding.offlineContainerView.isVisible = it
+            } ?: run {
+                binding.offlineContainerView.isVisible = false
+            }
         })
     }
 
@@ -98,10 +103,9 @@ class TrendingFragment @Inject constructor(): BaseFragment()  {
         delegate.setTitle(getString(R.string.fragment_trending_title))
 
         adapter.addLoadStateListener { loadState ->
-            if (loadState.refresh is LoadState.Loading){
+            if (loadState.refresh is LoadState.Loading) {
                 configureView(AppConstants.LOADING_LAYOUT, AppConstants.VIEW_FROM_LOADING)
-            }
-            else{
+            } else {
                 binding.swipeRefreshLayout.isRefreshing = false
                 configureView(AppConstants.DATA_LAYOUT, AppConstants.VIEW_FROM_API)
 

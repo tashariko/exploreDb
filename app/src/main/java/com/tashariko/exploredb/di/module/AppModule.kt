@@ -1,7 +1,6 @@
 package com.tashariko.exploredb.di.module
 
 import android.app.Application
-import android.os.Build
 import com.facebook.stetho.okhttp3.StethoInterceptor
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
@@ -17,7 +16,6 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import javax.inject.Inject
 import javax.inject.Singleton
 
 
@@ -29,11 +27,13 @@ class AppModule {
     fun providesGson(): Gson = GsonBuilder().create()
 
     @Provides
-    fun providesBaseUrl(): String = if (BuildConfig.DEBUG)  "https://api.themoviedb.org/" else  "https://api.themoviedb.org/"
+    fun providesBaseUrl(): String =
+        if (BuildConfig.DEBUG) "https://api.themoviedb.org/" else "https://api.themoviedb.org/"
 
     @Provides
     @Singleton
-    fun providesRequestInterceptor(application: Application): RequestInterceptor = RequestInterceptor(application.applicationContext, BuildConfig.API_DEVELOPER_TOKEN)
+    fun providesRequestInterceptor(application: Application): RequestInterceptor =
+        RequestInterceptor(application.applicationContext, BuildConfig.API_DEVELOPER_TOKEN)
 
 
     @CoroutineScropeIO
