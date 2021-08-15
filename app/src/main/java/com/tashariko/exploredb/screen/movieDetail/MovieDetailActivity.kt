@@ -5,7 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
-import coil.api.load
+import coil.load
 import com.tashariko.exploredb.R
 import com.tashariko.exploredb.application.AppConstants
 import com.tashariko.exploredb.application.base.BaseActivity

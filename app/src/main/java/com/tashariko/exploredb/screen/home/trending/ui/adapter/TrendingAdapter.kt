@@ -6,7 +6,7 @@ import android.widget.Toast
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import coil.api.load
+import coil.load
 import com.tashariko.exploredb.R
 import com.tashariko.exploredb.application.AppConstants
 import com.tashariko.exploredb.database.entity.TrendingItem
