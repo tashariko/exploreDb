@@ -93,7 +93,7 @@ fun ScreenContent(viewModel: SplashViewModel) {
 
             when (state.status) {
                 ApiResult.Status.LOADING -> {
-                    CircularProgressIndicator(color = MaterialTheme.appColor.primaryLight,
+                    CircularProgressIndicator(color = MaterialTheme.appColor.circularProgressbarColor,
                         strokeWidth = progessWidth,
                         modifier = Modifier
                             .height(progressSize)

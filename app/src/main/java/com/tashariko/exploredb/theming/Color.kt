@@ -1,6 +1,7 @@
 package com.tashariko.exploredb.theming
 
 import androidx.compose.material.Colors
+import androidx.compose.material.MaterialTheme
 import androidx.compose.ui.graphics.Color
 
 
@@ -30,7 +31,8 @@ data class AppColors(
     val appTextColor: Color,
     val appTextLightColor: Color,
     val appExtreme: Color,
-    val buttonDisabled: Color
+    val buttonDisabled: Color,
+    val circularProgressbarColor: Color = colorPrimaryLight
 ) {
     //val primary: Color get() = material.primary
 }

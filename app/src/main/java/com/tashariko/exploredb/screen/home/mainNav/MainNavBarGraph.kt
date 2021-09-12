@@ -13,18 +13,19 @@ import com.tashariko.exploredb.screen.home.user.UserScreen
 
 @Composable
 fun MainScreenNavigationConfig(
-    navController: NavHostController, modifier: Modifier
+    languageChanged: () -> Unit, navController: NavHostController, modifier: Modifier
 ) {
     NavHost(navController, startDestination = BottomNavigationScreens.Trending.route) {
-        addNavGraph(modifier = modifier)
+        addNavGraph(languageChanged = languageChanged,modifier = modifier)
     }
 }
 
 fun NavGraphBuilder.addNavGraph(
+    languageChanged: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     composable(BottomNavigationScreens.Trending.route) {
-        TrendingScreen(modifier = modifier)
+        TrendingScreen(languageChanged = languageChanged,modifier = modifier)
     }
     composable(BottomNavigationScreens.Search.route) {
         SearchScreen(modifier = modifier)

@@ -34,32 +34,10 @@ fun MainScreenContent(languageChanged: () -> Unit) {
     )
 
     Scaffold(
-        topBar = {
-            TopAppBar(title = {
-                ConstraintLayout(modifier = Modifier.fillMaxSize()) {
-                    val (titleView, languageButton) = createRefs()
-                    Text(context.getString(R.string.fragment_trending_title), modifier = Modifier
-                        .constrainAs(titleView) {
-                            centerVerticallyTo(parent)
-                            start.linkTo(parent.start)
-                        })
-                    val image: Painter = painterResource(id = R.drawable.icon_language_change)
-                    Image(painter = image, contentDescription = "", contentScale = ContentScale.Fit,
-                        modifier = Modifier
-                            .fillMaxHeight(0.8f)
-                            .width(iconStandardSize)
-                            .constrainAs(languageButton) {
-                                centerVerticallyTo(parent)
-                                end.linkTo(parent.end)
-                            }
-                            .clickable(onClick = languageChanged))
-                }
-            }, backgroundColor = MaterialTheme.appColor.material.primary)
-        },
         bottomBar = {
             AppBottomNavigation(navController, bottomNavigationItems)
         },
     ) { innerPadding ->
-        MainScreenNavigationConfig(navController, modifier = Modifier.padding(innerPadding))
+        MainScreenNavigationConfig(languageChanged, navController, modifier = Modifier.padding(innerPadding))
     }
 }
