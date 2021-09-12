@@ -17,11 +17,13 @@ import com.tashariko.exploredb.R
 import com.tashariko.exploredb.application.base.AppCompose
 import com.tashariko.exploredb.application.base.BaseActivity
 import com.tashariko.exploredb.network.result.ApiResult
+import com.tashariko.exploredb.screen.home.OldMainActivity
 import com.tashariko.exploredb.screen.home.MainActivity
 import com.tashariko.exploredb.theming.appColor
 import com.tashariko.exploredb.theming.progessWidth
 import com.tashariko.exploredb.theming.progressSize
 import com.tashariko.exploredb.theming.space14
+import com.tashariko.exploredb.util.UtilityHelper
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -104,7 +106,11 @@ fun ScreenContent(viewModel: SplashViewModel) {
                             })
                 }
                 ApiResult.Status.SUCCESS -> {
-                    MainActivity.launchScreen(LocalContext.current)
+                    if(UtilityHelper.isComposeWork()) {
+                        MainActivity.launchScreen(LocalContext.current)
+                    }else{
+                        OldMainActivity.launchScreen(context)
+                    }
                     //Toast.makeText(LocalContext.current.applicationContext,"Open main screen",Toast.LENGTH_SHORT).show()
                 }
 

@@ -8,9 +8,10 @@ import androidx.activity.compose.setContent
 import com.tashariko.exploredb.application.base.AppCompose
 import com.tashariko.exploredb.application.base.BaseActivity
 import com.tashariko.exploredb.screen.home.mainNav.MainScreenContent
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : BaseActivity() {
-
     companion object {
         fun launchScreen(context: Context) {
             context.startActivity(Intent(context, MainActivity::class.java))

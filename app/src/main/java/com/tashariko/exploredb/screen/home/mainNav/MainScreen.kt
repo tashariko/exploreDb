@@ -18,13 +18,14 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.compose.rememberNavController
+import androidx.paging.ExperimentalPagingApi
 import com.tashariko.exploredb.R
 import com.tashariko.exploredb.theming.appColor
 import com.tashariko.exploredb.theming.iconStandardSize
 
+@ExperimentalPagingApi
 @Composable
 fun MainScreenContent(languageChanged: () -> Unit) {
-    val context = LocalContext.current
     val navController = rememberNavController()
 
     val bottomNavigationItems = listOf(
