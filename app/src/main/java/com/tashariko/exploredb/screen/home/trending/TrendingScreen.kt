@@ -1,6 +1,8 @@
 package com.tashariko.exploredb.screen.home.trending
 
+import android.content.Context
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -12,12 +14,15 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.items
+import coil.compose.rememberImagePainter
 import com.tashariko.exploredb.R
 import com.tashariko.exploredb.database.entity.TrendingItem
 import com.tashariko.exploredb.screen.home.trending.ui.TrendingViewModel
@@ -74,7 +79,9 @@ fun TrendingScreen(languageChanged: () -> Unit, viewModel: TrendingViewModel, mo
                 }
             ) {
                 items(trendingList) { item ->
-                    Text(text = "Item: $item")
+                    item?.let {
+                        getItemView(it,viewModel, context)
+                    }
                     Spacer(modifier = Modifier.height(height = space18))
                     Spacer(modifier = Modifier.height(height = space18))
                 }
@@ -102,6 +109,70 @@ fun TrendingScreen(languageChanged: () -> Unit, viewModel: TrendingViewModel, mo
                 }
             }
         }
+    }
+}
+
+/**
+ * For coil in compose: https://coil-kt.github.io/coil/compose/
+ */
+@Composable
+private fun getItemView(item: TrendingItem, viewModel: TrendingViewModel, context: Context) {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .fillMaxHeight(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        item.posterPath?.let {
+            Box(
+                modifier = Modifier.fillMaxSize()
+                    .background(color = MaterialTheme.colors.background)
+            ) {
+                Image(
+                    painter = rememberImagePainter(
+                        "${viewModel.getImagePath(context).first}${
+                            viewModel.getImagePath(
+                                context
+                            ).third
+                        }${it}"
+                    ),
+                    contentDescription = null,
+                    modifier = Modifier.fillMaxWidth().height(180.dp),
+                )
+            }
+        } ?: run {
+            Box(
+                modifier = Modifier.fillMaxSize()
+                    .background(color = MaterialTheme.colors.background)
+            ) {
+                Image(
+                    painterResource(R.drawable.icon_movie),
+                    contentDescription = "",
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier.fillMaxWidth().height(180.dp),
+                )
+            }
+        }
+
+        Text(
+            text = item.originalTitle ?: "No Title",
+            style = MaterialTheme.typography.body2,
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier.padding(0.dp,2.dp,0.dp,0.dp)
+        )
+
+        Text(
+            text = item.overview ?: "No Overview",
+            style = MaterialTheme.typography.body2,
+            modifier = Modifier.padding(0.dp,2.dp,0.dp,0.dp)
+        )
+
+        Text(
+            text = item.mediaType,
+            style = MaterialTheme.typography.subtitle1,
+            modifier = Modifier.padding(0.dp,2.dp,0.dp, space14)
+        )
     }
 }
 

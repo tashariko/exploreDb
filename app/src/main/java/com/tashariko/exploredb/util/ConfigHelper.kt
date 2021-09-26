@@ -1,5 +1,6 @@
 package com.tashariko.exploredb.util
 
+import com.tashariko.exploredb.database.entity.DbConfig
 import android.content.Context
 import com.google.gson.Gson
 import com.google.gson.JsonObject
@@ -7,7 +8,8 @@ import com.google.gson.reflect.TypeToken
 import com.tashariko.exploredb.application.AppConstants
 
 object ConfigHelper {
-    private fun getConfigJson(mContext: Context): JsonObject? {
+
+    fun getConfigJson(mContext: Context): JsonObject? {
         return try {
             val gson = Gson()
             val type = object : TypeToken<JsonObject>() {}.type
