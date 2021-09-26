@@ -83,6 +83,7 @@ dependencies {
 
     //Pagination
     implementation "androidx.paging:paging-runtime-ktx:$rootProject.pagingVersion"
+    implementation "androidx.paging:paging-compose:1.0.0-alpha12"
 
     //Room
     implementation "androidx.room:room-runtime:$rootProject.roomVersion"
@@ -125,7 +126,7 @@ dependencies {
     implementation "com.google.dagger:hilt-android:$rootProject.hiltCoreVersion"
     kapt "com.google.dagger:hilt-compiler:$rootProject.hiltCoreVersion"
     kapt "androidx.hilt:hilt-compiler:$rootProject.hiltVersion"
-
+    implementation "androidx.hilt:hilt-navigation-compose:1.0.0-alpha03"
     //App Start
     implementation "androidx.startup:startup-runtime:$rootProject.startupRuntimeVersion"
 

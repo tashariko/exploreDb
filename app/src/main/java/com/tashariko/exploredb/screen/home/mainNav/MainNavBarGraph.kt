@@ -2,6 +2,7 @@ package com.tashariko.exploredb.screen.home.mainNav
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
@@ -30,7 +31,7 @@ fun NavGraphBuilder.addNavGraph(
     modifier: Modifier = Modifier
 ) {
     composable(BottomNavigationScreens.Trending.route) {
-        TrendingScreen(languageChanged = languageChanged, modifier = modifier)
+        TrendingScreen(languageChanged = languageChanged, viewModel = hiltViewModel<TrendingViewModel>(),modifier = modifier)
     }
     composable(BottomNavigationScreens.Search.route) {
         SearchScreen(modifier = modifier)

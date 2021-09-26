@@ -17,12 +17,12 @@ import com.tashariko.exploredb.R
 import com.tashariko.exploredb.application.base.AppCompose
 import com.tashariko.exploredb.application.base.BaseActivity
 import com.tashariko.exploredb.network.result.ApiResult
-import com.tashariko.exploredb.screen.home.OldMainActivity
 import com.tashariko.exploredb.screen.home.MainActivity
 import com.tashariko.exploredb.theming.appColor
 import com.tashariko.exploredb.theming.progessWidth
 import com.tashariko.exploredb.theming.progressSize
 import com.tashariko.exploredb.theming.space14
+import com.tashariko.exploredb.util.ConfigHelper
 import com.tashariko.exploredb.util.UtilityHelper
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -106,11 +106,7 @@ fun ScreenContent(viewModel: SplashViewModel) {
                             })
                 }
                 ApiResult.Status.SUCCESS -> {
-                    if(UtilityHelper.isComposeWork()) {
-                        MainActivity.launchScreen(LocalContext.current)
-                    }else{
-                        OldMainActivity.launchScreen(context)
-                    }
+                    MainActivity.launchScreen(LocalContext.current)
                     //Toast.makeText(LocalContext.current.applicationContext,"Open main screen",Toast.LENGTH_SHORT).show()
                 }
 
@@ -122,15 +118,19 @@ fun ScreenContent(viewModel: SplashViewModel) {
                             bottom.linkTo(parent.bottom)
                         })
 
-                    Button(onClick = { viewModel.getConfig(context = context) },
-                        content = { Text(text = LocalContext.current.getString(R.string.retryText)) },
-                        colors = ButtonDefaults.buttonColors(
-                            backgroundColor = MaterialTheme.appColor.primaryLight,
-                        ),
-                        modifier = Modifier.constrainAs(button) {
-                            bottom.linkTo(spacer2.top)
-                            centerHorizontallyTo(parent)
-                        })
+                    if(ConfigHelper.isConfigAvailable(context)){
+                        MainActivity.launchScreen(LocalContext.current)
+                    }else {
+                        Button(onClick = { viewModel.getConfig(context = context) },
+                            content = { Text(text = LocalContext.current.getString(R.string.retryText)) },
+                            colors = ButtonDefaults.buttonColors(
+                                backgroundColor = MaterialTheme.appColor.primaryLight,
+                            ),
+                            modifier = Modifier.constrainAs(button) {
+                                bottom.linkTo(spacer2.top)
+                                centerHorizontallyTo(parent)
+                            })
+                    }
                 }
             }
         }

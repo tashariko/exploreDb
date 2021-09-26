@@ -1,6 +1,8 @@
 package com.tashariko.exploredb.screen.home.trending.data
 
 import androidx.paging.*
+import androidx.room.withTransaction
+import com.tashariko.exploredb.database.AppDatabase
 import com.tashariko.exploredb.database.dao.TrendingItemDao
 import com.tashariko.exploredb.database.dao.TrendingRemoteKeysDao
 import com.tashariko.exploredb.database.entity.TrendingItem
@@ -69,7 +71,8 @@ class TrendingPageDataSource constructor(val trendingRemoteDataSource: TrendingR
 class TrendingMediator constructor(
     val trendingRemoteDataSource: TrendingRemoteDataSource,
     val trendingItemDao: TrendingItemDao,
-    val remoteKeysDao: TrendingRemoteKeysDao
+    val remoteKeysDao: TrendingRemoteKeysDao,
+    val appDatabase: AppDatabase
 ) :
     RemoteMediator<Int, TrendingItem>() {
 
@@ -111,24 +114,25 @@ class TrendingMediator constructor(
         try {
             val response = trendingRemoteDataSource.getProductList(page, state.config.pageSize)
 
-            Timber.i("Response Came")
             response.data!!.results.let { list ->
 
                 val isEndOfList = list.isEmpty()
 
-                if (loadType == LoadType.REFRESH) {
-                    remoteKeysDao.clearRemoteKeys()
-                    trendingItemDao.clearAllItems()
-                }
+                appDatabase.withTransaction {
+                    if (loadType == LoadType.REFRESH) {
+                        remoteKeysDao.clearRemoteKeys()
+                        trendingItemDao.clearAllItems()
+                    }
 
-                val prevKey = if (page == DEFAULT_PAGE_INDEX) null else page - 1
-                val nextKey = if (isEndOfList) null else page + 1
-                val keys = list.map { item ->
-                    TrendingRemtoteKey(repoId = item.id, prevKey = prevKey, nextKey = nextKey)
-                }
+                    val prevKey = if (page == DEFAULT_PAGE_INDEX) null else page - 1
+                    val nextKey = if (isEndOfList) null else page + 1
+                    val keys = list.map { item ->
+                        TrendingRemtoteKey(repoId = item.id, prevKey = prevKey, nextKey = nextKey)
+                    }
 
-                remoteKeysDao.insertAll(keys)
-                trendingItemDao.insertAll(list)
+                    remoteKeysDao.insertAll(keys)
+                    trendingItemDao.insertAll(list)
+                }
 
                 return MediatorResult.Success(endOfPaginationReached = isEndOfList)
             }
@@ -159,13 +163,15 @@ class TrendingMediator constructor(
                 key
             }
             LoadType.PREPEND -> {
-                val remoteKeys = getFirstRemoteKey(state)
-                //crashing here
-                    ?: throw InvalidObjectException("Invalid state, key should not be null")
+                /**
+                 * To handle when we are handling prepend
+                 */
+                /*val remoteKeys = getFirstRemoteKey(state)
+                ?: throw InvalidObjectException("Invalid state, key should not be null")
                 val key = remoteKeys.prevKey
                 Timber.i("Prepend: $key")
-                key
-                //return MediatorResult.Success(endOfPaginationReached = true)
+                key*/
+                return MediatorResult.Success(endOfPaginationReached = true)
             }
         }
     }
@@ -174,10 +180,14 @@ class TrendingMediator constructor(
      * get the last remote key inserted which had the data
      */
     private suspend fun getLastRemoteKey(state: PagingState<Int, TrendingItem>): TrendingRemtoteKey? {
-        return state.pages
+        val pages = state.pages
             .lastOrNull { it.data.isNotEmpty() }
             ?.data?.lastOrNull()
             ?.let { tItem -> remoteKeysDao.remoteKeysTrendingId(tItem.id) }
+
+        Timber.i("TAG__${pages?.localId}")
+
+        return pages
     }
 
     /**

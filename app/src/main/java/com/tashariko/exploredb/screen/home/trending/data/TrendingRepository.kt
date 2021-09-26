@@ -5,6 +5,7 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.tashariko.exploredb.application.base.BaseDataSource
+import com.tashariko.exploredb.database.AppDatabase
 import com.tashariko.exploredb.database.dao.TrendingItemDao
 import com.tashariko.exploredb.database.dao.TrendingRemoteKeysDao
 import com.tashariko.exploredb.database.entity.TrendingItem
@@ -14,9 +15,10 @@ import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class TrendingRepository @Inject constructor(
-    val remoteDataSource: TrendingRemoteDataSource,
+    private val remoteDataSource: TrendingRemoteDataSource,
     val trendingItemDao: TrendingItemDao,
-    val trendingRemoteKeysDao: TrendingRemoteKeysDao
+    val trendingRemoteKeysDao: TrendingRemoteKeysDao,
+    val appDatabase: AppDatabase
 ) {
 
     fun getTrendingItemsWithNoDb(): Flow<PagingData<TrendingItem>> =
@@ -28,14 +30,17 @@ class TrendingRepository @Inject constructor(
     @ExperimentalPagingApi
     fun getTrendingItemsWithDb(): Flow<PagingData<TrendingItem>> {
 
-        val pagingSourceFactory = { trendingItemDao.getAllItems() }
+        val pagingSourceFactory = {
+            trendingItemDao.getAllItems()
+        }
         return Pager(
             config = getDefaultPageConfig(),
             pagingSourceFactory = pagingSourceFactory,
             remoteMediator = TrendingMediator(
                 remoteDataSource,
                 trendingItemDao,
-                trendingRemoteKeysDao
+                trendingRemoteKeysDao,
+                appDatabase
             )
         ).flow
     }
