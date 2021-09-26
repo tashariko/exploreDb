@@ -3,20 +3,19 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-kapt'
     id 'kotlin-android-extensions'
+    id 'dagger.hilt.android.plugin'
 }
 
 android {
-    compileSdkVersion 29
-    buildToolsVersion "30.0.2"
+    compileSdk 30
 
     defaultConfig {
         applicationId "com.tashariko.exploredb"
-        minSdkVersion 21
-        targetSdkVersion 29
+        minSdk 21
+        targetSdk 30
         versionCode 1
         versionName "1.0"
 
-        testInstrumentationRunner "androidx.test.kt.runner.AndroidJUnitRunner"
         buildConfigField 'String', 'API_DEVELOPER_TOKEN', "\"${API_DEVELOPER_TOKEN}\""
     }
 
@@ -31,13 +30,22 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion rootProject.composeVersion
+        kotlinCompilerVersion rootProject.kotlinVersion
+    }
+
     kotlinOptions {
         jvmTarget = '1.8'
+        useIR = true
     }
 
     buildFeatures {
         viewBinding = true
+        compose = true
     }
+
 }
 
 tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
@@ -75,6 +83,7 @@ dependencies {
 
     //Pagination
     implementation "androidx.paging:paging-runtime-ktx:$rootProject.pagingVersion"
+    implementation "androidx.paging:paging-compose:1.0.0-alpha12"
 
     //Room
     implementation "androidx.room:room-runtime:$rootProject.roomVersion"
@@ -114,12 +123,10 @@ dependencies {
     releaseImplementation "com.readystatesoftware.chuck:library-no-op:$rootProject.chuck"
 
     //Dagger
-    kapt "com.google.dagger:dagger-compiler:$rootProject.daggerVersion"
-    kapt "com.google.dagger:dagger-android-processor:$rootProject.daggerVersion"
-    implementation "com.google.dagger:dagger:$rootProject.daggerVersion"
-    implementation "com.google.dagger:dagger-android:$rootProject.daggerVersion"
-    implementation "com.google.dagger:dagger-android-support:$rootProject.daggerVersion"
-
+    implementation "com.google.dagger:hilt-android:$rootProject.hiltCoreVersion"
+    kapt "com.google.dagger:hilt-compiler:$rootProject.hiltCoreVersion"
+    kapt "androidx.hilt:hilt-compiler:$rootProject.hiltVersion"
+    implementation "androidx.hilt:hilt-navigation-compose:1.0.0-alpha03"
     //App Start
     implementation "androidx.startup:startup-runtime:$rootProject.startupRuntimeVersion"
 
@@ -128,5 +135,32 @@ dependencies {
 
     //to fix the error happening at the starting of the app
     implementation 'org.conscrypt:conscrypt-android:2.4.0'
+
+
+    /**
+     * https://developer.android.com/jetpack/compose/setup
+     */
+    implementation "androidx.compose.ui:ui:$rootProject.composeVersion"
+    // Tooling support (Previews, etc.)
+    implementation "androidx.compose.ui:ui-tooling:$rootProject.composeVersion"
+    // Foundation (Border, Background, Box, Image, Scroll, shapes, animations, etc.)
+    implementation "androidx.compose.foundation:foundation:$rootProject.composeVersion"
+    // Material Design
+    implementation "androidx.compose.material:material:$rootProject.composeVersion"
+    // Material design icons
+    implementation "androidx.compose.material:material-icons-core:$rootProject.composeVersion"
+    implementation "androidx.compose.material:material-icons-extended:$rootProject.composeVersion"
+    
+    // Integration with ViewModels
+    implementation "androidx.lifecycle:lifecycle-viewmodel-compose:$rootProject.viewModelComposeVersion"
+    // Integration with observables
+    implementation "androidx.compose.runtime:runtime-livedata:$rootProject.composeVersion"
+
+    // Integration with activities
+    implementation "androidx.activity:activity-compose:$rootProject.activityComposeVersion"
+
+    implementation "androidx.constraintlayout:constraintlayout-compose:1.0.0-beta02"
+
+    implementation "androidx.navigation:navigation-compose:2.4.0-alpha06"
 
 }

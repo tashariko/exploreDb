@@ -11,10 +11,12 @@ import com.tashariko.exploredb.application.AppConstants
 import com.tashariko.exploredb.network.ConfigurationResponse
 import com.tashariko.exploredb.network.result.ApiResult
 import com.tashariko.exploredb.util.SharedPreferenceHelper
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@HiltViewModel
 class SplashViewModel @Inject constructor() : ViewModel() {
 
     @Inject

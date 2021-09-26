@@ -3,20 +3,36 @@ package com.tashariko.exploredb.screen.splash
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import androidx.core.view.isVisible
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import com.google.android.material.snackbar.Snackbar
+import androidx.activity.compose.setContent
+import androidx.activity.viewModels
+import androidx.compose.foundation.layout.*
+import androidx.compose.material.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.font.FontWeight
+import androidx.constraintlayout.compose.ConstraintLayout
 import com.tashariko.exploredb.R
+import com.tashariko.exploredb.application.base.AppCompose
 import com.tashariko.exploredb.application.base.BaseActivity
-import com.tashariko.exploredb.databinding.ActivityLandingBinding
-import com.tashariko.exploredb.di.util.injectViewModel
 import com.tashariko.exploredb.network.result.ApiResult
-import com.tashariko.exploredb.network.result.ErrorType
-import com.tashariko.exploredb.screen.main.MainActivity
-import javax.inject.Inject
+import com.tashariko.exploredb.screen.home.MainActivity
+import com.tashariko.exploredb.theming.appColor
+import com.tashariko.exploredb.theming.progessWidth
+import com.tashariko.exploredb.theming.progressSize
+import com.tashariko.exploredb.theming.space14
+import com.tashariko.exploredb.util.ConfigHelper
+import com.tashariko.exploredb.util.UtilityHelper
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class LandingActivity : BaseActivity() {
+
+    /**
+     * Bug:
+     * Not going fullscreen
+     */
 
     companion object {
 
@@ -27,67 +43,96 @@ class LandingActivity : BaseActivity() {
         }
     }
 
-    lateinit var binding: ActivityLandingBinding
-
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
-
-    lateinit var viewModel: SplashViewModel
+    private val splashViewModel by viewModels<SplashViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityLandingBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        viewModel = injectViewModel(viewModelFactory)
-        bindAndSetupUI()
-        vmListeners()
+        handleIncomingIntent()
+        setContent {
+            AppCompose {
+                ScreenContent(viewModel = splashViewModel)
+            }
+        }
+
+        splashViewModel.getConfig(this)
     }
 
     override fun handleIncomingIntent() {
 
     }
+}
 
-    override fun bindAndSetupUI() {
-        binding.retryButton.setOnClickListener {
-            viewModel.getConfig(this)
-        }
-    }
+@Composable
+fun ScreenContent(viewModel: SplashViewModel) {
 
-    override fun vmListeners() {
-        viewModel.createTaskLiveData.observe(this, Observer {
-            binding.progressBar.isVisible = false
-            binding.retryButton.isVisible = false
-            when (it.status) {
+    val viewModelState = viewModel.createTaskLiveData.observeAsState()
+    val context = LocalContext.current
+
+    viewModelState.value?.let { state ->
+
+        /**
+         * Can use constraint set also
+         * https://blog.mindorks.com/constraint-layout-in-jetpack-compose
+         */
+        ConstraintLayout(modifier = Modifier.fillMaxSize()) {
+            val (appName, spacer, spacer2, progress, button) = createRefs()
+            Text(
+                text = LocalContext.current.getString(R.string.app_name),
+                style = MaterialTheme.typography.h4,
+                fontWeight = FontWeight.Bold,
+                modifier = Modifier
+                    .constrainAs(appName) {
+                        centerTo(parent)
+                    }
+            )
+            Spacer(modifier = Modifier
+                .height(space14)
+                .fillMaxWidth()
+                .constrainAs(spacer) {
+                    top.linkTo(appName.bottom)
+                    centerHorizontallyTo(appName)
+                })
+
+            when (state.status) {
                 ApiResult.Status.LOADING -> {
-                    binding.progressBar.isVisible = true
+                    CircularProgressIndicator(color = MaterialTheme.appColor.circularProgressbarColor,
+                        strokeWidth = progessWidth,
+                        modifier = Modifier
+                            .height(progressSize)
+                            .width(progressSize)
+                            .constrainAs(progress) {
+                                top.linkTo(spacer.bottom)
+                                centerHorizontallyTo(appName)
+                            })
                 }
                 ApiResult.Status.SUCCESS -> {
-                    MainActivity.launchScreen(this)
+                    MainActivity.launchScreen(LocalContext.current)
+                    //Toast.makeText(LocalContext.current.applicationContext,"Open main screen",Toast.LENGTH_SHORT).show()
                 }
+
                 ApiResult.Status.ERROR -> {
-                    it.errorType?.let { et ->
-                        if (et.type == ErrorType.Type.Generic) {
-                            showToast(getString(R.string.generic_error_message))
-                        } else {
-                            et.message?.let { msg ->
-                                Snackbar.make(binding.root, msg, Snackbar.LENGTH_SHORT).show()
-                            } ?: run {
-                                showToast(getString(R.string.generic_error_message))
-                            }
-                        }
-                    } ?: run {
-                        showToast(getString(R.string.generic_error_message))
+                    Spacer(modifier = Modifier
+                        .height(space14)
+                        .fillMaxWidth()
+                        .constrainAs(spacer2) {
+                            bottom.linkTo(parent.bottom)
+                        })
+
+                    if(ConfigHelper.isConfigAvailable(context)){
+                        MainActivity.launchScreen(LocalContext.current)
+                    }else {
+                        Button(onClick = { viewModel.getConfig(context = context) },
+                            content = { Text(text = LocalContext.current.getString(R.string.retryText)) },
+                            colors = ButtonDefaults.buttonColors(
+                                backgroundColor = MaterialTheme.appColor.primaryLight,
+                            ),
+                            modifier = Modifier.constrainAs(button) {
+                                bottom.linkTo(spacer2.top)
+                                centerHorizontallyTo(parent)
+                            })
                     }
-                    binding.retryButton.isVisible = true
                 }
             }
-        })
-
-        viewModel.getConfig(this)
+        }
     }
-
-    override fun viewlisteners() {
-
-    }
-
 }

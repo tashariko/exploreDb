@@ -8,13 +8,12 @@ import com.tashariko.exploredb.application.AppConstants
 import com.tashariko.exploredb.network.ConfigurationResponse
 import com.tashariko.exploredb.util.SharedPreferenceHelper
 
-open class BaseViewModel : ViewModel() {
-
+open class BaseViewModel: ViewModel() {
 
     fun getImagePath(mContext: Context): Triple<String, String, String> {
         val string = SharedPreferenceHelper.getStringFromSharedPreference(
-            mContext,
-            AppConstants.SP_KEY_CONFIG
+                mContext,
+                AppConstants.SP_KEY_CONFIG
         )
         val type = object : TypeToken<ConfigurationResponse>() {}.type
         val config: ConfigurationResponse = Gson().fromJson(string, type)
@@ -23,14 +22,14 @@ open class BaseViewModel : ViewModel() {
             var original = ""
             var downed = ""
             for (item in this.poster_sizes) {
-                if (item == "original") {
+                if(item == "original"){
                     original = item
-                } else if (item == "w154") {
+                }else if(item == "w154") {
                     downed = item
                 }
             }
 
-            return Triple(base_url, downed, original)
+            return Triple(base_url,downed, original)
         }
 
     }

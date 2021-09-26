@@ -42,11 +42,11 @@ object NetworkObserver : ConnectivityManager.NetworkCallback() {
         return netLiveData
     }
 
-    override fun onAvailable(network: Network?) {
+    override fun onAvailable(network: Network) {
         netLiveData.postValue(true)
     }
 
-    override fun onLost(network: Network?) {
+    override fun onLost(network: Network) {
         netLiveData.postValue(false)
     }
 }

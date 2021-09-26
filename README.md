@@ -1,6 +1,7 @@
 # ExploreDB
 
 ExploreDB is a sample android app which show the usage of repository pattern. It implements Clean Architecture with latest android trends.
+
 ## Libraries Used
 * [Android-KTX](https://developer.android.com/kotlin/ktx)
 * [Kotlin](https://kotlinlang.org/docs/reference/android-overview.html)
@@ -28,12 +29,10 @@ Pagination work:
 
 ## WIP
 * [Jetpack Compose](https://github.com/tashariko/exploreDb/tree/ComposeWork)
-* Pagination
 
 ## Plan for next iteration but to eventually forget
 * Add Search api
 * Add Test cases
-
 
 ## In a galaxy far far away
 * Use scoped storage: https://medium.com/better-programming/android-scoped-storage-demystified-3024a062ba24

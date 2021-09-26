@@ -21,7 +21,7 @@ class BaseForFragmentActivity : BaseActivity() {
         fragType = intent.extras!!.getString(TYPE_FRAGMENT)!!
     }
 
-    override fun bindAndSetupUI() {
+    fun bindAndSetupUI() {
         val bundle = Bundle()
         supportFragmentManager.commit {
             when (fragType) {
@@ -31,11 +31,11 @@ class BaseForFragmentActivity : BaseActivity() {
 
     }
 
-    override fun vmListeners() {
+    fun vmListeners() {
         TODO("Not yet implemented")
     }
 
-    override fun viewlisteners() {
+    fun viewlisteners() {
         TODO("Not yet implemented")
     }
 
