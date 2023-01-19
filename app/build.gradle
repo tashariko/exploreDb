@@ -7,13 +7,13 @@ plugins {
 }
 
 android {
-    compileSdk 30
+    compileSdk 33
 
     defaultConfig {
         applicationId "com.tashariko.exploredb"
         minSdk 21
-        targetSdk 30
-        versionCode 1
+        targetSdk 33
+        versionCode 6
         versionName "1.0"
 
         buildConfigField 'String', 'API_DEVELOPER_TOKEN', "\"${API_DEVELOPER_TOKEN}\""
@@ -126,7 +126,7 @@ dependencies {
     implementation "com.google.dagger:hilt-android:$rootProject.hiltCoreVersion"
     kapt "com.google.dagger:hilt-compiler:$rootProject.hiltCoreVersion"
     kapt "androidx.hilt:hilt-compiler:$rootProject.hiltVersion"
-    implementation "androidx.hilt:hilt-navigation-compose:1.0.0-alpha03"
+    implementation "androidx.hilt:hilt-navigation-compose:1.0.0"
     //App Start
     implementation "androidx.startup:startup-runtime:$rootProject.startupRuntimeVersion"
 
@@ -135,7 +135,6 @@ dependencies {
 
     //to fix the error happening at the starting of the app
     implementation 'org.conscrypt:conscrypt-android:2.4.0'
-
 
     /**
      * https://developer.android.com/jetpack/compose/setup
@@ -159,8 +158,8 @@ dependencies {
     // Integration with activities
     implementation "androidx.activity:activity-compose:$rootProject.activityComposeVersion"
 
-    implementation "androidx.constraintlayout:constraintlayout-compose:1.0.0-beta02"
+    implementation "androidx.constraintlayout:constraintlayout-compose:1.0.0"
 
-    implementation "androidx.navigation:navigation-compose:2.4.0-alpha06"
+    implementation "androidx.navigation:navigation-compose:2.5.0"
 
 }

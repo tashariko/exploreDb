@@ -17,7 +17,8 @@
         android:theme="@style/Theme.ExploreDb">
         <activity android:name=".screen.splash.SplashActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/SplashScreenStyle">
+            android:theme="@style/SplashScreenStyle"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

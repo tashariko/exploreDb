@@ -10,7 +10,7 @@ buildscript {
         appCompatVersion = '1.2.0'
         constraintLayoutVersion = '2.0.2'
         coroutinesVersion = "1.4.1"
-        fragmentVersion = '1.2.5'
+        fragmentVersion = '1.5.5'
         glideVersion = '4.9.0'
         gradleVersion = '7.0.0'
         kotlinVersion = '1.5.21'
@@ -19,7 +19,7 @@ buildscript {
         lifecycleVersion = '2.2.0'
         materialVersion = '1.2.1'
         recyclerViewVersion = '1.1.0'
-        roomVersion = '2.3.0-alpha02'
+        roomVersion = '2.4.0-alpha03'
         workVersion = '2.4.0'
         gsonVersion = '2.8.2'
         okhttp = '4.7.2'
